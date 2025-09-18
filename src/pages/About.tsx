@@ -1,9 +1,11 @@
+// at the top of src/pages/About.tsx
+import Timeline from "../components/Timeline";
+import type { Milestone } from "../components/Timeline";
 import { school } from "../data/school";
 import PageHero from "../components/PageHero";
 import Card from "../components/ui/Card";
 import ImageSplit from "../components/ImageSplit";
-import Timeline from "../components/Timeline";
-import type { Milestone } from "../components/Timeline";
+
 
 
 const milestones: Milestone[] = [

@@ -1,8 +1,10 @@
+// src/components/Accordion.tsx
 import { useState } from "react";
+import type { ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "../lib/cn";
 
-export function AccordionItem({ q, a }: { q: string; a: React.ReactNode }) {
+export function AccordionItem({ q, a }: { q: string; a: ReactNode }) {
     const [open, setOpen] = useState(false);
     return (
         <div className="border-b border-black/10 py-3">
@@ -18,6 +20,7 @@ export function AccordionItem({ q, a }: { q: string; a: React.ReactNode }) {
         </div>
     );
 }
-export default function Accordion({ items }: { items: { q: string; a: React.ReactNode }[] }) {
+
+export default function Accordion({ items }: { items: { q: string; a: ReactNode }[] }) {
     return <div className="divide-y divide-black/5">{items.map((it, i) => <AccordionItem key={i} {...it} />)}</div>;
 }

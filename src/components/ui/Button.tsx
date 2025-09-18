@@ -1,8 +1,9 @@
-import * as React from "react";
+// src/components/ui/Button.tsx
+import type { ButtonHTMLAttributes } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cn } from "../../lib/cn";
 
-type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
     asChild?: boolean;
     variant?: "solid" | "ghost" | "outline";
     size?: "sm" | "md" | "lg";
