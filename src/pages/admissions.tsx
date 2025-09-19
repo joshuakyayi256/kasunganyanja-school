@@ -18,17 +18,12 @@ export default function Admissions() {
 
       <Section>
         <div className="grid lg:grid-cols-2 gap-8">
-          <Reveal>
-            <EnrollmentApply />
-          </Reveal>
+          <Reveal><EnrollmentApply /></Reveal>
           <Reveal delay={0.05}>
             <ColorCard>
-              <h3 className="text-xl font-bold text-navy">
-                Fees & Scholarships
-              </h3>
+              <h3 className="text-xl font-bold text-navy">Fees & Scholarships</h3>
               <p className="mt-2 text-black/80">
-                We keep fees modest and offer support for vulnerable families
-                through donor-funded scholarships.
+                We keep fees modest and offer support for vulnerable families through donor-funded scholarships.
               </p>
               <ul className="mt-3 list-disc pl-5 text-black/85 space-y-1">
                 <li>Transparent fee structure shared upon application.</li>
@@ -45,20 +40,13 @@ export default function Admissions() {
 
       <Section>
         <div className="grid lg:grid-cols-2 gap-8" id="visit">
-          <Reveal>
-            <VisitScheduler />
-          </Reveal>
+          <Reveal><VisitScheduler /></Reveal>
           <Reveal delay={0.05}>
             <ColorCard>
-              <h3 className="text-xl font-bold text-navy">
-                Admissions Process
-              </h3>
+              <h3 className="text-xl font-bold text-navy">Admissions Process</h3>
               <ol className="mt-2 list-decimal pl-5 text-black/85 space-y-1">
                 <li>Submit the online application or call admissions.</li>
-                <li>
-                  Provide required documents (birth certificate, photo, previous
-                  report).
-                </li>
+                <li>Provide required documents (birth certificate, photo, previous report).</li>
                 <li>Short reading & numeracy check (P2–P7).</li>
                 <li>Enrollment decision & welcome briefing.</li>
               </ol>

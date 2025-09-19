@@ -1,101 +1,64 @@
 import PageHero from "../components/PageHero";
-import ColorCard from "../components/ColorCard";
-import Accordion from "../components/Accordion";
-import ObjectivesStrip from "../components/ObjectivesStrip";
-import DailySchedule from "../components/DailySchedule";
-import ImageSplit from "../components/ImageSplit";
 import Section from "../components/Section";
+import ColorCard from "../components/ColorCard";
+import EnrollmentApply from "../components/EnrollmentApply";
+import VisitScheduler from "../components/VisitScheduler";
+import Button from "../components/ui/Button";
 import Reveal from "../components/Reveal";
-import { school } from "../data/school";
 
-export default function Academics() {
-  const { p1p3, p4p7, note } = school.academics;
-
+export default function Admissions() {
   return (
     <div>
       <PageHero
         size="xl"
-        bgImage="/images/hero-class.jpg"
         tint="light"
-        title="Academics"
-        subtitle="Strong foundation in literacy, numeracy, science — with active learning and PE."
+        title="Admissions"
+        subtitle="Apply online, explore fees & scholarships, and schedule a visit."
       />
 
-      <Section className="space-y-10">
-        <Reveal>
-          <div className="grid md:grid-cols-2 gap-6">
+      <Section>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <Reveal>
+            <EnrollmentApply />
+          </Reveal>
+
+          <Reveal delay={0.05}>
             <ColorCard>
-              <h4 className="text-xl font-bold text-navy">
-                Primary 1 – Primary 3
-              </h4>
-              <ul className="mt-2 list-disc pl-5 text-black/85 space-y-1 text-lg">
-                {p1p3.map((s) => (
-                  <li key={s}>{s}</li>
-                ))}
+              <h3 className="text-xl font-bold text-navy">Fees & Scholarships</h3>
+              <p className="mt-2 text-black/80">
+                We keep fees modest and offer support for vulnerable families through donor-funded scholarships.
+              </p>
+              <ul className="mt-3 list-disc pl-5 text-black/85 space-y-1">
+                <li>Transparent fee structure shared upon application.</li>
+                <li>Need-based assistance where possible.</li>
               </ul>
+              <div className="mt-4 flex gap-3">
+                <Button variant="outline">Download Fee Guide (PDF)</Button>
+                <Button>Request Scholarship Info</Button>
+              </div>
             </ColorCard>
-            <ColorCard>
-              <h4 className="text-xl font-bold text-navy">
-                Primary 4 – Primary 7
-              </h4>
-              <ul className="mt-2 list-disc pl-5 text-black/85 space-y-1 text-lg">
-                {p4p7.map((s) => (
-                  <li key={s}>{s}</li>
-                ))}
-              </ul>
-            </ColorCard>
-          </div>
-        </Reveal>
-
-        <Reveal>
-          <ImageSplit
-            title="Clubs & Sports"
-            text="Pupils build confidence through sports, debate, music, and creative arts. They learn teamwork and discover their talents."
-            img="/images/campus-2.jpg"
-          />
-        </Reveal>
-
-        <Reveal>
-          <ColorCard>
-            <h4 className="text-xl font-bold text-navy">Co-curricular</h4>
-            <ul className="mt-3 grid sm:grid-cols-2 gap-2 text-black/85 text-lg">
-              <li>• Sports & Physical Education (compulsory)</li>
-              <li>• Debate & Public Speaking</li>
-              <li>• Music, Dance & Drama</li>
-              <li>• Reading & Literacy Circles</li>
-            </ul>
-            <p className="mt-3 text-black/70">{note}</p>
-          </ColorCard>
-        </Reveal>
-
-        <Reveal>
-          <ColorCard>
-            <h4 className="text-xl font-bold text-navy mb-2">FAQs</h4>
-            <Accordion
-              items={[
-                {
-                  q: "Do learners need uniforms?",
-                  a: "Yes, uniforms encourage equality and discipline. Details are provided during admission.",
-                },
-                {
-                  q: "How do parents stay involved?",
-                  a: "Through scheduled meetings, open days, and regular updates from class teachers.",
-                },
-                {
-                  q: "Are there extra classes?",
-                  a: "Targeted support may be offered where helpful and communicated by the school.",
-                },
-              ]}
-            />
-          </ColorCard>
-        </Reveal>
+          </Reveal>
+        </div>
       </Section>
 
-      <Section container="section-tight">
-        <DailySchedule />
-      </Section>
-      <Section container="section-tight">
-        <ObjectivesStrip />
+      <Section>
+        <div className="grid lg:grid-cols-2 gap-8" id="visit">
+          <Reveal>
+            <VisitScheduler />
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <ColorCard>
+              <h3 className="text-xl font-bold text-navy">Admissions Process</h3>
+              <ol className="mt-2 list-decimal pl-5 text-black/85 space-y-1">
+                <li>Submit the online application or call admissions.</li>
+                <li>Provide required documents (birth certificate, photo, previous report).</li>
+                <li>Short reading & numeracy check (P2–P7).</li>
+                <li>Enrollment decision & welcome briefing.</li>
+              </ol>
+            </ColorCard>
+          </Reveal>
+        </div>
       </Section>
     </div>
   );
