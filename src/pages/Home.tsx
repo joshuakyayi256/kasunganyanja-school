@@ -2,10 +2,13 @@ import { Link } from "react-router-dom";
 import PageHero from "../components/PageHero";
 import Button from "../components/ui/Button";
 import Badge from "../components/ui/Badge";
-import Card from "../components/ui/Card";
+import ColorCard from "../components/ColorCard";
 import ImageSplit from "../components/ImageSplit";
 import CTAWide from "../components/CTAWide";
 import Reveal from "../components/Reveal";
+import Section from "../components/Section";
+import WaveDivider from "../components/WaveDivider";
+import GradientHighlight from "../components/GradientHighlight";
 import { school } from "../data/school";
 import {
   Users,
@@ -37,10 +40,10 @@ const features = [
 export default function Home() {
   return (
     <>
-      {/* Hero */}
       <PageHero
         size="xl"
         bgImage="/images/hero-main.jpg"
+        tint="navy"
         title={school.name}
         subtitle={`A licensed mixed day school (P1–P7) committed to “${school.motto}”.`}
         right={
@@ -57,76 +60,82 @@ export default function Home() {
         }
       />
 
-      {/* Quick stats */}
-      <section className="section grid sm:grid-cols-3 gap-4">
-        <Reveal>
-          <Card className="card-hover">
-            <div className="flex items-center gap-3">
-              <Users className="size-5 text-navy" />
-              <div>
-                <div className="text-3xl font-extrabold">
-                  {school.enrollment}+
-                </div>
-                <div className="text-sm text-black/70">Students</div>
-              </div>
-            </div>
-          </Card>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <Card className="card-hover">
-            <div className="flex items-center gap-3">
-              <GraduationCap className="size-5 text-navy" />
-              <div>
-                <div className="text-3xl font-extrabold">P1–P7</div>
-                <div className="text-sm text-black/70">Full Primary</div>
-              </div>
-            </div>
-          </Card>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <Card className="card-hover">
-            <div className="flex items-center gap-3">
-              <Landmark className="size-5 text-navy" />
-              <div>
-                <div className="text-3xl font-extrabold">{school.founded}</div>
-                <div className="text-sm text-black/70">Founded</div>
-              </div>
-            </div>
-          </Card>
-        </Reveal>
-      </section>
+      <WaveDivider color="bg-skyline" position="bottom" />
 
-      {/* Differentiators */}
-      <section className="section-tight">
+      {/* Quick stats on a subtle sky band for separation */}
+      <Section tone="sky" container="section-tight">
+        <div className="grid sm:grid-cols-3 gap-4">
+          <Reveal>
+            <ColorCard className="card-hover">
+              <div className="flex items-center gap-3">
+                <Users className="size-5 text-navy" />
+                <div>
+                  <div className="text-3xl font-extrabold">
+                    {school.enrollment}+
+                  </div>
+                  <div className="text-sm text-black/70">Students</div>
+                </div>
+              </div>
+            </ColorCard>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <ColorCard className="card-hover">
+              <div className="flex items-center gap-3">
+                <GraduationCap className="size-5 text-navy" />
+                <div>
+                  <div className="text-3xl font-extrabold">P1–P7</div>
+                  <div className="text-sm text-black/70">Full Primary</div>
+                </div>
+              </div>
+            </ColorCard>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <ColorCard className="card-hover">
+              <div className="flex items-center gap-3">
+                <Landmark className="size-5 text-navy" />
+                <div>
+                  <div className="text-3xl font-extrabold">
+                    {school.founded}
+                  </div>
+                  <div className="text-sm text-black/70">Founded</div>
+                </div>
+              </div>
+            </ColorCard>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Differentiators on a navy slice */}
+      <Section tone="navy">
         <Reveal>
-          <h2 className="text-3xl font-bold text-navy mb-5">
-            What Makes Us Different
-          </h2>
+          <h2 className="text-3xl font-bold mb-5">What Makes Us Different</h2>
         </Reveal>
         <div className="grid md:grid-cols-3 gap-4">
           {features.map((f, i) => (
             <Reveal key={f.title} delay={i * 0.05}>
-              <Card className="card-hover">
-                <div className="p-2 rounded-xl bg-navy/10 inline-block mb-2">
-                  <f.icon className="size-5 text-navy" />
+              <ColorCard tone="navy" className="card-hover bg-white/5">
+                <div className="p-2 rounded-xl bg-white/10 inline-block mb-2">
+                  <f.icon className="size-5 text-white" />
                 </div>
-                <h3 className="font-semibold text-lg">{f.title}</h3>
-                <p className="mt-2 text-black/80 text-lg">{f.text}</p>
-              </Card>
+                <h3 className="font-semibold text-lg text-white">{f.title}</h3>
+                <p className="mt-2 text-white/85 text-lg">{f.text}</p>
+              </ColorCard>
             </Reveal>
           ))}
         </div>
-      </section>
+      </Section>
 
-      {/* Sponsor CTA band */}
-      <section className="section-tight">
+      {/* Sponsor CTA inside a subtle gold frame */}
+      <Section container="section-tight">
         <Reveal>
-          <CTAWide />
+          <GradientHighlight>
+            <CTAWide />
+          </GradientHighlight>
         </Reveal>
-      </section>
+      </Section>
 
       {/* One strong image story */}
-      <section className="section-tight">
+      <Section container="section-tight">
         <Reveal>
           <ImageSplit
             title="Learning that shapes character"
@@ -134,12 +143,7 @@ export default function Home() {
             img="/images/campus-1.jpg"
           />
         </Reveal>
-      </section>
-
-      {/* Location footer note (light) */}
-      <section className="section-tight">
-
-      </section>
+      </Section>
     </>
   );
 }

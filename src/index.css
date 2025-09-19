@@ -6,7 +6,7 @@
 html { font-size: 17px; }
 ::selection { background: #F5B30166; }
 
-/* Light, watery blue site background (polished) */
+/* Site-wide sky background */
 body {
   @apply bg-skywash text-black font-sans;
   background:
@@ -15,29 +15,25 @@ body {
     linear-gradient(180deg, rgba(232,244,255,0.6), transparent 30%);
 }
 
-/* Content containers (consistent spacing across pages) */
+a { @apply transition-colors; }
+
+/* Consistent section spacing */
 .section       { @apply max-w-6xl mx-auto px-4 py-12; }
 .section-tight { @apply max-w-6xl mx-auto px-4 py-8;  }
 .section-loose { @apply max-w-6xl mx-auto px-4 py-16; }
 
-/* Subtle card hover */
-.card-hover { @apply transition-transform duration-300 hover:-translate-y-0.5; }
+/* Colorful helpers (for optional slices/bands) */
+.section-sky  { @apply bg-skyline; }   /* pale blue band */
+.section-navy { @apply bg-navy text-white; }
+.section-gold { background: linear-gradient(180deg, #FFE8A6 0%, #F5B30122 100%); }
 
-a { @apply transition-colors; }
-
-/* ——— colored section helpers ——— */
-.section-sky    { @apply bg-skyline; }
-.section-navy   { @apply bg-navy text-white; }
-.section-ink    { background: linear-gradient(180deg, #0B2E4E 0%, #0b1220 100%); color: white; }
-.section-gold   { background: linear-gradient(180deg, #FFE8A6 0%, #F5B30122 100%); }
-
-.strip-navy  { @apply h-1.5 w-12 bg-navy rounded-full; }
-.strip-gold  { @apply h-1.5 w-12 bg-accent rounded-full; }
+.strip-navy { @apply h-1.5 w-12 bg-navy rounded-full; }
+.strip-gold { @apply h-1.5 w-12 bg-accent rounded-full; }
 
 .card-tinted { @apply bg-white border border-black/10 rounded-2xl shadow-sm; }
 .card-navy   { @apply bg-navy text-white border border-white/10 rounded-2xl shadow-sm; }
 
-/* gradient borders for fancy highlights */
+/* Gradient highlight frame */
 .gradient-border {
   position: relative;
   border-radius: 1rem;
@@ -49,7 +45,10 @@ a { @apply transition-colors; }
   background: white;
 }
 
-/* soft wave divider (top or bottom) */
+/* Subtle card hover */
+.card-hover { @apply transition-transform duration-300 hover:-translate-y-0.5; }
+
+/* Optional wave masks */
 .wave-top {
   mask: radial-gradient(50% 20px at 50% 0, #0000 99%, #000) top/100% 51% no-repeat,
         linear-gradient(#000, #000);
@@ -58,4 +57,3 @@ a { @apply transition-colors; }
   mask: radial-gradient(50% 20px at 50% 100%, #0000 99%, #000) bottom/100% 51% no-repeat,
         linear-gradient(#000, #000);
 }
-
