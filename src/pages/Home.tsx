@@ -1,14 +1,19 @@
+// src/pages/Home.tsx
 import { Link } from "react-router-dom";
 import PageHero from "../components/PageHero";
 import Button from "../components/ui/Button";
 import Badge from "../components/ui/Badge";
 import ColorCard from "../components/ColorCard";
-import ImageSplit from "../components/ImageSplit";
-import CTAWide from "../components/CTAWide";
 import Reveal from "../components/Reveal";
 import Section from "../components/Section";
 import WaveDivider from "../components/WaveDivider";
 import GradientHighlight from "../components/GradientHighlight";
+import DonationProgress from "../components/DonationProgress";
+import ImpactCalculator from "../components/ImpactCalculator";
+import ObjectivesStrip from "../components/ObjectivesStrip";
+import DailySchedule from "../components/DailySchedule";
+import Testimonials from "../components/Testimonials";
+import MissionVisionStrip from "../components/MissionVisionStrip";
 import { school } from "../data/school";
 import {
   Users,
@@ -23,17 +28,17 @@ const features = [
   {
     icon: ShieldCheck,
     title: "Safe & Caring",
-    text: "We foster discipline, respect, and character—children learn in a secure, loving environment.",
+    text: "Discipline, respect, and character in a secure environment.",
   },
   {
     icon: Sparkles,
     title: "Creative Learning",
-    text: "Active literacy, numeracy, and science with hands-on activities that spark curiosity.",
+    text: "Hands-on literacy, numeracy, science that spark curiosity.",
   },
   {
     icon: HeartHandshake,
     title: "Community First",
-    text: "Parents, teachers, and local leaders partner to support each learner’s journey.",
+    text: "Parents and local leaders supporting every learner.",
   },
 ];
 
@@ -49,10 +54,10 @@ export default function Home() {
         right={
           <div className="flex flex-wrap items-center gap-3">
             <Button asChild>
-              <Link to="/about">Learn More</Link>
+              <Link to="/donate">Donate</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/donate">Donate</Link>
+              <Link to="/sponsor">Sponsor a Child</Link>
             </Button>
             <Badge>Founded {school.founded}</Badge>
             <Badge>{school.enrollment}+ learners</Badge>
@@ -62,8 +67,22 @@ export default function Home() {
 
       <WaveDivider color="bg-skyline" position="bottom" />
 
-      {/* Quick stats on a subtle sky band for separation */}
-      <Section tone="sky" container="section-tight">
+      {/* Progress + Calculator upfront for transparency */}
+      <Section container="section-tight">
+        <div className="grid lg:grid-cols-2 gap-6">
+          <Reveal>
+            <DonationProgress targetUGX={50_000_000} currentUGX={12_500_000} />
+          </Reveal>
+          <Reveal delay={0.05}>
+            <ColorCard className="card-hover">
+              <ImpactCalculator />
+            </ColorCard>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Stats */}
+      <Section container="section-tight">
         <div className="grid sm:grid-cols-3 gap-4">
           <Reveal>
             <ColorCard className="card-hover">
@@ -105,43 +124,98 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Differentiators on a navy slice */}
-      <Section tone="navy">
+      {/* Differentiators */}
+      <Section container="section-tight">
         <Reveal>
-          <h2 className="text-3xl font-bold mb-5">What Makes Us Different</h2>
+          <h2 className="text-3xl font-bold text-navy mb-5">
+            What Makes Us Different
+          </h2>
         </Reveal>
         <div className="grid md:grid-cols-3 gap-4">
           {features.map((f, i) => (
             <Reveal key={f.title} delay={i * 0.05}>
-              <ColorCard tone="navy" className="card-hover bg-white/5">
-                <div className="p-2 rounded-xl bg-white/10 inline-block mb-2">
-                  <f.icon className="size-5 text-white" />
+              <ColorCard className="card-hover">
+                <div className="p-2 rounded-xl bg-navy/10 inline-block mb-2">
+                  <f.icon className="size-5 text-navy" />
                 </div>
-                <h3 className="font-semibold text-lg text-white">{f.title}</h3>
-                <p className="mt-2 text-white/85 text-lg">{f.text}</p>
+                <h3 className="font-semibold text-lg">{f.title}</h3>
+                <p className="mt-2 text-black/80 text-lg">{f.text}</p>
               </ColorCard>
             </Reveal>
           ))}
         </div>
       </Section>
 
-      {/* Sponsor CTA inside a subtle gold frame */}
+      {/* Mission & Vision strip */}
+      <MissionVisionStrip mission={school.mission} vision={school.vision} />
+
+      {/* Academics snapshot */}
+      <Section container="section-tight">
+        <ObjectivesStrip />
+      </Section>
+
+      {/* Admissions teaser */}
       <Section container="section-tight">
         <Reveal>
           <GradientHighlight>
-            <CTAWide />
+            <div className="grid md:grid-cols-2 gap-4 items-center">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-extrabold text-navy">
+                  Admissions
+                </h3>
+                <p className="mt-2 text-black/80">
+                  Apply online in minutes or book a campus visit. Financial
+                  assistance is available.
+                </p>
+              </div>
+              <div className="flex gap-3 md:justify-end">
+                <Button asChild size="lg">
+                  <Link to="/admissions">Apply Online</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link to="/admissions#visit">Schedule a Visit</Link>
+                </Button>
+              </div>
+            </div>
           </GradientHighlight>
         </Reveal>
       </Section>
 
-      {/* One strong image story */}
+      {/* Daily schedule */}
+      <Section container="section-tight">
+        <DailySchedule />
+      </Section>
+
+      {/* Testimonials */}
+      <Testimonials />
+
+      {/* === Replaced “Location” note with a strong site-wide CTA === */}
       <Section container="section-tight">
         <Reveal>
-          <ImageSplit
-            title="Learning that shapes character"
-            text="Academic excellence grows alongside values: responsibility, honesty, and service. Teachers model strong character and nurture children to be confident, curious, and kind."
-            img="/images/campus-1.jpg"
-          />
+          <GradientHighlight>
+            <div className="grid md:grid-cols-2 gap-4 items-center">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-extrabold text-navy">
+                  Join Our Mission
+                </h3>
+                <p className="mt-2 text-black/80">
+                  Help us deliver quality primary education in
+                  Kasunganyanja—every gift and every sponsor changes a life.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3 md:justify-end">
+                <Button asChild size="lg">
+                  <Link to="/donate">Donate</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link to="/sponsor">Sponsor a Child</Link>
+                </Button>
+                <Button asChild size="lg" variant="ghost">
+                  <Link to="/impact">See Impact</Link>
+                </Button>
+              </div>
+            </div>
+          </GradientHighlight>
         </Reveal>
       </Section>
     </>

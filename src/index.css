@@ -57,3 +57,9 @@ a { @apply transition-colors; }
   mask: radial-gradient(50% 20px at 50% 100%, #0000 99%, #000) bottom/100% 51% no-repeat,
         linear-gradient(#000, #000);
 }
+
+/* Better rounding and shadow look is handled by Tailwind classes above.
+   This tiny tweak makes gradients smoother on retina. */
+@media (min-resolution: 2dppx) {
+  .bg-gradient-to-br { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+}
