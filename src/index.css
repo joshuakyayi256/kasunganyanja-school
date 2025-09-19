@@ -2,33 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ↑ Tailwind must be first */
+/* Readability */
+html { font-size: 17px; }
+::selection { background: #F5B30166; }
 
-/* Slightly larger base type across the site */
-html {
-  font-size: 17px;
-}
-
-::selection {
-  background: #f5b30166;
-}
-
-/* Light theme */
+/* Light, watery blue site background (polished) */
 body {
-  @apply bg-white text-black font-sans;
-  background: radial-gradient(
-      900px 400px at 10% -10%,
-      rgba(245, 179, 1, 0.06),
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 400px at 90% -10%,
-      rgba(13, 77, 45, 0.05),
-      transparent 55%
-    );
+  @apply bg-skywash text-black font-sans;
+  background:
+    radial-gradient(900px 400px at 15% -10%, rgba(11,46,78,0.06), transparent 60%),
+    radial-gradient(900px 400px at 85% -10%, rgba(207,233,255,0.45), transparent 55%),
+    linear-gradient(180deg, rgba(232,244,255,0.6), transparent 30%);
 }
 
-/* Links inherit color from parent; smooth hover */
-a {
-  @apply transition-colors;
+/* Content containers (consistent spacing across pages) */
+.section       { @apply max-w-6xl mx-auto px-4 py-12; }
+.section-tight { @apply max-w-6xl mx-auto px-4 py-8;  }
+.section-loose { @apply max-w-6xl mx-auto px-4 py-16; }
+
+/* Subtle card hover */
+.card-hover { @apply transition-transform duration-300 hover:-translate-y-0.5; }
+
+a { @apply transition-colors; }
+
+/* ——— colored section helpers ——— */
+.section-sky    { @apply bg-skyline; }
+.section-navy   { @apply bg-navy text-white; }
+.section-ink    { background: linear-gradient(180deg, #0B2E4E 0%, #0b1220 100%); color: white; }
+.section-gold   { background: linear-gradient(180deg, #FFE8A6 0%, #F5B30122 100%); }
+
+.strip-navy  { @apply h-1.5 w-12 bg-navy rounded-full; }
+.strip-gold  { @apply h-1.5 w-12 bg-accent rounded-full; }
+
+.card-tinted { @apply bg-white border border-black/10 rounded-2xl shadow-sm; }
+.card-navy   { @apply bg-navy text-white border border-white/10 rounded-2xl shadow-sm; }
+
+/* gradient borders for fancy highlights */
+.gradient-border {
+  position: relative;
+  border-radius: 1rem;
+  padding: 1px;
+  background: linear-gradient(135deg, #0B2E4E, #F5B301, #CFE9FF);
 }
+.gradient-border > .inner {
+  border-radius: inherit;
+  background: white;
+}
+
+/* soft wave divider (top or bottom) */
+.wave-top {
+  mask: radial-gradient(50% 20px at 50% 0, #0000 99%, #000) top/100% 51% no-repeat,
+        linear-gradient(#000, #000);
+}
+.wave-bottom {
+  mask: radial-gradient(50% 20px at 50% 100%, #0000 99%, #000) bottom/100% 51% no-repeat,
+        linear-gradient(#000, #000);
+}
+
