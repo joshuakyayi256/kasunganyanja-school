@@ -26,13 +26,13 @@ const milestones: Milestone[] = [
   },
   {
     year: "2024",
-    title: "Infrastructure & Co-curricular",
-    text: "Upgraded learning spaces and broadened clubs (sports, debate, music).",
+    title: "Facilities & Co-curricular",
+    text: "Better classrooms and more clubs (sports, debate, music).",
   },
   {
     year: "Today",
     title: "200+ Learners",
-    text: "Fully licensed, with a clear focus on transformation and success.",
+    text: "Fully licensed, focused on transformation and success.",
   },
 ];
 
@@ -43,24 +43,11 @@ export default function About() {
         size="xl"
         bgImage="/images/hero-kids.jpg"
         tint="light"
-        title="Transforming Lives Through Education"
+        title="About the School"
         subtitle={`Founded in ${school.founded} by ${school.founder}. We prepare young minds for responsible citizenship and lifelong achievement.`}
       />
 
       <Section className="space-y-10">
-        <Reveal>
-          <div className="space-y-3">
-            <h2 className="text-3xl font-bold text-navy">Our Story</h2>
-            <p className="text-lg text-black/85">
-              {school.name} began with a simple conviction: children in
-              Kasunganyanja deserve access to high-quality education close to
-              home. From 50 learners to over {school.enrollment}, our mission
-              remains the same: nurture knowledge, skills, and values for a
-              brighter Uganda.
-            </p>
-          </div>
-        </Reveal>
-
         <Reveal>
           <div className="grid md:grid-cols-3 gap-6">
             <ColorCard>
@@ -80,51 +67,42 @@ export default function About() {
 
         <Reveal>
           <ImageSplit
-            title="A culture of care and excellence"
-            text="We maintain a safe, respectful environment where every child is known and supported. Our teachers model positive discipline and growth mindset, inspiring learners to aim high."
+            title="Leadership & Culture"
+            text="Our leadership team sets a strong standard for integrity, accountability, and care. We cultivate a professional, nurturing culture that inspires learners and staff alike."
             img="/images/learning-1.jpg"
           />
         </Reveal>
 
+        {/* Facilities carousel placeholder — integrate your gallery later */}
         <Reveal>
-          <div className="grid md:grid-cols-2 gap-6">
-            <ColorCard>
-              <h4 className="text-xl font-bold text-navy">Objectives</h4>
-              <ul className="mt-2 list-disc pl-5 text-black/85 space-y-1 text-lg">
-                {school.objectives.map((o) => (
-                  <li key={o}>{o}</li>
-                ))}
-              </ul>
-            </ColorCard>
-            <ColorCard>
-              <h4 className="text-xl font-bold text-navy">Core Values</h4>
-              <ul className="mt-2 list-disc pl-5 text-black/85 space-y-1 text-lg">
-                {school.coreValues.map((v) => (
-                  <li key={v}>{v}</li>
-                ))}
-              </ul>
-            </ColorCard>
-          </div>
+          <ColorCard>
+            <h3 className="text-2xl font-bold text-navy mb-2">Facilities</h3>
+            <p className="text-black/80">
+              Spacious classrooms, safe play areas, and a clean environment
+              conducive to learning.
+            </p>
+          </ColorCard>
+        </Reveal>
+
+        {/* Transparency / reports link */}
+        <Reveal>
+          <ColorCard>
+            <h3 className="text-2xl font-bold text-navy mb-2">Transparency</h3>
+            <p className="text-black/80">
+              View our budgets, audit notes, and annual impact summaries in the
+              Impact page.
+            </p>
+          </ColorCard>
         </Reveal>
 
         <Reveal>
-          <ImageSplit
-            reverse
-            title="Community engagement"
-            text="Parents, local leaders, and friends of the school partner with us through open days, service projects, and ongoing dialogue. Together we raise the next generation."
-            img="/images/learning-2.jpg"
-          />
+          <ColorCard>
+            <h3 className="text-2xl md:text-3xl font-bold mb-3 text-navy">
+              Our Journey
+            </h3>
+            <Timeline items={milestones} />
+          </ColorCard>
         </Reveal>
-      </Section>
-
-      {/* navy timeline slice */}
-      <Section tone="navy" container="section-tight">
-        <ColorCard tone="navy" className="bg-white/5">
-          <h3 className="text-2xl md:text-3xl font-bold mb-3 text-white">
-            Our Journey
-          </h3>
-          <Timeline items={milestones} />
-        </ColorCard>
       </Section>
 
       <MissionVisionStrip mission={school.mission} vision={school.vision} />

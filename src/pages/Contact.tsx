@@ -2,9 +2,10 @@ import { useState } from "react";
 import { school } from "../data/school";
 import PageHero from "../components/PageHero";
 import Button from "../components/ui/Button";
-import Card from "../components/ui/Card";
+import ColorCard from "../components/ColorCard";
 import EnrollmentApply from "../components/EnrollmentApply";
 import VisitScheduler from "../components/VisitScheduler";
+import Section from "../components/Section";
 import Reveal from "../components/Reveal";
 
 export default function Contact() {
@@ -17,54 +18,59 @@ export default function Contact() {
     <div>
       <PageHero
         size="lg"
-        title="Contact & Admissions"
+        tint="light"
+        title="Contact"
         subtitle={school.location}
       />
 
-      <section className="section grid lg:grid-cols-2 gap-8">
-        <Reveal>
-          <Card>
-            <h3 className="text-2xl font-bold">Get in touch</h3>
-            <p className="mt-2 text-lg text-black/85">
-              Phone: <strong>{school.contacts.phone}</strong>
-              <br />
-              Email: <strong>{school.contacts.email}</strong>
-            </p>
-            <p className="mt-2 text-black/80">
-              We welcome prospective parents, partners, and well-wishers. Reach
-              out for admissions details, school visits, or ways to support our
-              learners.
-            </p>
-          </Card>
-        </Reveal>
+      <Section>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <Reveal>
+            <ColorCard>
+              <h3 className="text-2xl font-bold">Get in touch</h3>
+              <p className="mt-2 text-lg text-black/85">
+                Phone: <strong>{school.contacts.phone}</strong>
+                <br />
+                Email: <strong>{school.contacts.email}</strong>
+              </p>
+              <p className="mt-2 text-black/80">
+                We welcome prospective parents, partners, and well-wishers.
+                Reach out for admissions details, school visits, or ways to
+                support our learners.
+              </p>
+            </ColorCard>
+          </Reveal>
 
-        <Reveal delay={0.05}>
-          <EnrollmentApply />
-        </Reveal>
-      </section>
+          <Reveal delay={0.05}>
+            <EnrollmentApply />
+          </Reveal>
+        </div>
+      </Section>
 
-      <section className="section grid lg:grid-cols-2 gap-8">
-        <Reveal>
-          <Card>
-            <h4 className="text-lg font-semibold mb-2">Location Map</h4>
-            <div className="rounded-xl overflow-hidden border border-black/10">
-              <iframe
-                title="Map"
-                src={`https://maps.google.com/maps?q=${mapsQuery}&z=12&ie=UTF8&iwloc=&output=embed`}
-                className="w-full h-64"
-                loading="lazy"
-              />
-            </div>
-          </Card>
-        </Reveal>
+      <Section>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <Reveal>
+            <ColorCard>
+              <h4 className="text-lg font-semibold mb-2">Location Map</h4>
+              <div className="rounded-xl overflow-hidden border border-black/10">
+                <iframe
+                  title="Map"
+                  src={`https://maps.google.com/maps?q=${mapsQuery}&z=12&ie=UTF8&iwloc=&output=embed`}
+                  className="w-full h-64"
+                  loading="lazy"
+                />
+              </div>
+            </ColorCard>
+          </Reveal>
 
-        <Reveal delay={0.05}>
-          <VisitScheduler />
-        </Reveal>
-      </section>
+          <Reveal delay={0.05}>
+            <VisitScheduler />
+          </Reveal>
+        </div>
+      </Section>
 
-      <section className="section">
-        <Card>
+      <Section>
+        <ColorCard>
           <h3 className="text-2xl font-bold">Send a Message</h3>
           <form
             className="mt-3 grid gap-4 sm:grid-cols-2"
@@ -107,8 +113,8 @@ export default function Contact() {
               </p>
             )}
           </form>
-        </Card>
-      </section>
+        </ColorCard>
+      </Section>
     </div>
   );
 }

@@ -1,29 +1,57 @@
-import Card from "./ui/Card";
-import { cn } from "../lib/cn";
-import { div } from "framer-motion/client";
-
-function fmtUGX(n: number) { return "UGX " + n.toLocaleString(); }
+// src/components/DonationProgress.tsx
+type Props = {
+  targetUGX: number;
+  currentUGX: number;
+  title?: string;
+  note?: string;
+};
 
 export default function DonationProgress({
-  targetUGX, currentUGX, className,
-}: { targetUGX: number; currentUGX: number; className?: string }) {
-  const pct = Math.min(100, Math.round((currentUGX / targetUGX) * 100 || 0));
+  targetUGX,
+  currentUGX,
+  title = "Campaign Progress",
+  note = "Every gift helps us reach more learners.",
+}: Props) {
+  const pct = Math.max(
+    0,
+    Math.min(100, Math.round((currentUGX / Math.max(targetUGX, 1)) * 100))
+  );
+
+  const fmt = (n: number) =>
+    `UGX ${n.toLocaleString("en-UG", { maximumFractionDigits: 0 })}`;
+
   return (
-    <Card className={cn("p-5", className)}>
-      <div className="flex items-end justify-between gap-3">
-        <div>
-          <div className="text-sm text-black/70">Raised</div>
-          <div className="text-2xl font-extrabold">{fmtUGX(currentUGX)}</div>
+    <div className="rounded-2xl border border-black/10 bg-white p-4 md:p-5">
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="text-lg md:text-xl font-bold text-navy">{title}</h3>
+        <div className="text-sm text-black/70">{pct}%</div>
+      </div>
+
+      <div
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={pct}
+        className="mt-3 h-3 w-full rounded-full bg-black/10 overflow-hidden"
+      >
+        <div
+          className="h-full rounded-full bg-navy transition-[width] duration-700"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+
+      <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
+        <div className="rounded-xl border border-black/10 bg-black/5 px-3 py-2">
+          <div className="text-black/60">Raised</div>
+          <div className="font-semibold">{fmt(currentUGX)}</div>
         </div>
-        <div className="text-right">
-          <div className="text-sm text-black/70">Goal</div>
-          <div className="text-xl font-bold">{fmtUGX(targetUGX)}</div>
+        <div className="rounded-xl border border-black/10 bg-black/5 px-3 py-2">
+          <div className="text-black/60">Goal</div>
+          <div className="font-semibold">{fmt(targetUGX)}</div>
         </div>
       </div>
-      <div className="mt-3 h-3 w-full rounded-full bg-black/[.06] overflow-hidden">
-        <div className="h-full bg-navy transition-[width] duration-700" style={{ width: `${pct}%` }} />
-      </div>
-      <div className="mt-2 text-sm text-black/70">{pct}% funded</div>
-    </Card>
+
+      <p className="mt-3 text-xs text-black/60">{note}</p>
+    </div>
   );
 }
