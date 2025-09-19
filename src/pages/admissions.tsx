@@ -11,14 +11,17 @@ export default function Admissions() {
     <div>
       <PageHero
         size="xl"
-        tint="light"
+        bgImage="/images/learning.jpg"
         title="Admissions"
         subtitle="Apply online, explore fees & scholarships, and schedule a visit."
       />
 
       <Section>
         <div className="grid lg:grid-cols-2 gap-8">
-          <Reveal><EnrollmentApply /></Reveal>
+          <Reveal>
+            <EnrollmentApply />
+          </Reveal>
+
           <Reveal delay={0.05}>
             <ColorCard>
               <h3 className="text-xl font-bold text-navy">Fees & Scholarships</h3>
@@ -40,7 +43,10 @@ export default function Admissions() {
 
       <Section>
         <div className="grid lg:grid-cols-2 gap-8" id="visit">
-          <Reveal><VisitScheduler /></Reveal>
+          <Reveal>
+            <VisitScheduler />
+          </Reveal>
+
           <Reveal delay={0.05}>
             <ColorCard>
               <h3 className="text-xl font-bold text-navy">Admissions Process</h3>

@@ -47,20 +47,20 @@ export default function Home() {
     <>
       <PageHero
         size="xl"
-        bgImage="/images/hero-main.jpg"
+        bgImage="/images/hero-home.jpg"
         tint="navy"
         title={school.name}
         subtitle={`A licensed mixed day school (P1–P7) committed to “${school.motto}”.`}
         right={
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center text-white gap-3">
             <Button asChild>
               <Link to="/donate">Donate</Link>
             </Button>
             <Button asChild variant="outline">
               <Link to="/sponsor">Sponsor a Child</Link>
             </Button>
-            <Badge>Founded {school.founded}</Badge>
-            <Badge>{school.enrollment}+ learners</Badge>
+            <Badge className="text-white">Founded {school.founded}</Badge>
+            <Badge className="text-white">{school.enrollment}+ learners</Badge>
           </div>
         }
       />
