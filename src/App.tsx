@@ -6,7 +6,7 @@ import StickyDonateBar from "./components/StickyDonateBar";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Academics from "./pages/Academics";
-import Admissions from "./pages/admissions";
+import Admissions from "./pages/Admissions";
 import Donate from "./pages/Donate";
 import Sponsor from "./pages/Sponsor";
 import Impact from "./pages/Impact";
