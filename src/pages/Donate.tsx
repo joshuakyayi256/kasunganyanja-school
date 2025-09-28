@@ -8,7 +8,6 @@ import Section from "../components/Section";
 import Reveal from "../components/Reveal";
 import Badge from "../components/ui/Badge";
 
-// --- Data (top-level, outside the component) ---
 const tiers = [
   { amt: 10000, label: "Exercise books & pencils" },
   { amt: 30000, label: "Uniform support for one learner" },
@@ -32,12 +31,11 @@ export default function Donate() {
         subtitle="Donate via Mobile Money (UGX) directly to +256 757 158 407. Your gift provides books, meals, and teacher resources where the need is greatest."
         eyebrow="100% transparent targets"
         ctaPrimary={{ label: "Donate via Mobile Money", href: "#donate-now" }}
-        ctaSecondary={{ label: "See your impact", href: "/impact" }}
-        imageSrc="/images/child-save.jpg" // <- add your image file or remove this prop
+        ctaSecondary={{ label: "See your impact", href: "#impact" }}
+        imageSrc="/images/donate-hero.jpg"
         imageAlt="Learners reading at Kasunganyanja Parents Primary School"
       />
 
-      {/* Give Now + Transparency blocks */}
       <Section>
         <div className="grid gap-8 lg:grid-cols-2">
           <Reveal>
@@ -53,19 +51,21 @@ export default function Donate() {
 
           <div className="space-y-4">
             <Reveal>
-              <DonationProgress targetUGX={50_000_000} currentUGX={1_500_000} />
+              <DonationProgress targetUGX={50_000_000} currentUGX={12_500_000} />
             </Reveal>
             <Reveal delay={0.05}>
-              <ColorCard id="impact">
-                <h4 className="mb-3 text-lg font-semibold">Impact Calculator</h4>
-                <ImpactCalculator />
-              </ColorCard>
+              {/* 👇 Wrap the card with a div that carries the anchor id */}
+              <div id="impact">
+                <ColorCard>
+                  <h4 className="mb-3 text-lg font-semibold">Impact Calculator</h4>
+                  <ImpactCalculator />
+                </ColorCard>
+              </div>
             </Reveal>
           </div>
         </div>
       </Section>
 
-      {/* Tiers + Current Needs */}
       <Section>
         <div className="grid gap-8 md:grid-cols-2">
           <Reveal>
@@ -106,5 +106,3 @@ export default function Donate() {
     </div>
   );
 }
-
-
