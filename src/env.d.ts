@@ -11,6 +11,6 @@ declare module "*.mdx" {
         author?: string;
         readMins?: number;
     };
-    const MDXComponent: ComponentType<any>;
+    const MDXComponent: ComponentType<unknown>;
     export default MDXComponent;
 }
