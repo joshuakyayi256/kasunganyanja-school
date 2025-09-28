@@ -32,7 +32,7 @@ export default function Donate() {
         eyebrow="100% transparent targets"
         ctaPrimary={{ label: "Donate via Mobile Money", href: "#donate-now" }}
         ctaSecondary={{ label: "See your impact", href: "#impact" }}
-        imageSrc="/images/donate-hero.jpg"
+        imageSrc="/images/child-save.jpg"
         imageAlt="Learners reading at Kasunganyanja Parents Primary School"
       />
 
