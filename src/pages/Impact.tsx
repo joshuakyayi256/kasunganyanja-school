@@ -1,233 +1,176 @@
-// src/pages/Impact.tsx
 import PageHero from "../components/PageHero";
 import Section from "../components/Section";
 import ColorCard from "../components/ColorCard";
 import DonationProgress from "../components/DonationProgress";
 import ImpactCalculator from "../components/ImpactCalculator";
 import Reveal from "../components/Reveal";
+import Badge from "../components/ui/Badge";
 import Button from "../components/ui/Button";
-// Optional icons (comment out if you don't use lucide-react)
-import { BookOpen, Utensils, Users, FileText, ArrowRight, ShieldCheck } from "lucide-react";
+import { 
+  History, 
+  ShieldCheck, 
+  FileSpreadsheet, 
+  CalendarCheck,
+  TrendingUp,
+  Download,
+  Users,
+  Utensils,
+  BookOpen
+} from "lucide-react";
+import { cn } from "../lib/cn";
 
 export default function Impact() {
-  // Example live-ish stats (swap with real values or props)
+  // Update these manually after school administrative audits
+  const lastUpdated = "Dec 2025"; 
+  const currentRaised = 12500000;
+  const goalRaised = 50000000;
+
   const stats = [
-    { label: "Students Supported", value: "85", icon: Users },
-    { label: "Meals Served", value: "12,400", icon: Utensils },
-    { label: "Books Purchased", value: "1,150", icon: BookOpen },
+    { label: "Students Supported", value: "85", icon: Users, color: "text-blue-500", bg: "bg-blue-50" },
+    { label: "Meals Served", value: "12,400", icon: Utensils, color: "text-orange-500", bg: "bg-orange-50" },
+    { label: "Books Purchased", value: "1,150", icon: BookOpen, color: "text-green-500", bg: "bg-green-50" },
   ];
 
-  // Transparency breakdown (must sum to <= 100)
   const transparency = [
-    { label: "Learning Materials", pct: 42 },
-    { label: "Meals & Welfare", pct: 33 },
-    { label: "Teacher Support", pct: 15 },
-    { label: "Operations", pct: 10 },
-  ];
-
-  const milestones = [
-    { when: "Term 1", title: "Uniform & Books Drive", text: "Distributed starter kits to new pupils in P1–P3." },
-    { when: "Term 2", title: "Meal Program Scale-up", text: "Expanded lunch coverage to 4 additional classes." },
-    { when: "Term 3", title: "Teacher Training", text: "Workshop on literacy-focused instruction and feedback." },
+    { label: "Learning Materials", pct: 42, color: "bg-navy" },
+    { label: "Meals & Welfare", pct: 33, color: "bg-sky-500" },
+    { label: "Teacher Support", pct: 15, color: "bg-amber-500" },
+    { label: "Operations", pct: 10, color: "bg-slate-400" },
   ];
 
   return (
-    <div>
+    <div className="bg-slate-50 min-h-screen pb-24">
+      {/* 1. HERO: Setting the Standard */}
       <PageHero
-        size="xl"
-        tint="light"
-        title="Impact & Transparency"
-        subtitle="Track progress in real time, see how funds are used, and download reports."
+        size="lg"
+        bgImage="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2000"
+        tint="navy"
+        title="Accountability & Impact"
+        subtitle="We provide manual, termly audits of all community contributions to ensure 100% of your support reaches our learners."
       />
 
-      {/* Top: progress + calculator */}
-      <Section>
-        <div className="grid gap-6 lg:grid-cols-2">
-          <Reveal>
-            <ColorCard>
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-bold">Fundraising Progress</h3>
-                <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-xs">
-                  <ShieldCheck className="h-4 w-4" />
-                  Verified updates
+      {/* 2. PROGRESS: Manual Tracking */}
+      <Section container="section-tight" className="-mt-12 relative z-10">
+        <div className="grid gap-8 lg:grid-cols-5 items-start">
+          <div className="lg:col-span-3">
+            <Reveal>
+              <div className="bg-white p-8 md:p-10 rounded-[3rem] shadow-2xl shadow-navy/5 border border-slate-50">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h3 className="text-2xl font-black text-navy leading-none">Term 3 Progress</h3>
+                    <p className="text-[10px] text-slate-400 mt-2 font-black uppercase tracking-[0.2em]">
+                      Last Audit: {lastUpdated}
+                    </p>
+                  </div>
+                  <Badge variant="outline" className="text-navy border-navy/20 bg-navy/5">
+                    <History className="size-3 mr-1" /> Manual Reconciliation
+                  </Badge>
                 </div>
+                <DonationProgress targetUGX={goalRaised} currentUGX={currentRaised} />
               </div>
-              <div className="mt-4">
-                <DonationProgress targetUGX={50_000_000} currentUGX={1_500_000} />
-              </div>
-            </ColorCard>
-          </Reveal>
+            </Reveal>
+          </div>
 
-          <Reveal delay={0.05}>
-            <ColorCard>
-              <h3 className="text-xl font-bold">Impact Calculator</h3>
-              <p className="mt-1 text-sm text-black/70">
-                Estimate what your Mobile Money gift can do—books, meals, and teacher resources.
-              </p>
-              <div className="mt-4">
+          <div className="lg:col-span-2">
+            <Reveal delay={0.1}>
+              <div className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-50">
+                <h3 className="text-xl font-black text-navy mb-2">Impact Calculator</h3>
+                <p className="text-xs text-slate-500 mb-6">Estimate the reach of your contribution.</p>
                 <ImpactCalculator />
               </div>
-            </ColorCard>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
       </Section>
 
-      {/* Stats grid */}
-      <Section>
+      {/* 3. VERIFIED STATS: The Proof */}
+      <Section container="section-tight">
         <Reveal>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {stats.map(({ label, value, icon: Icon }) => (
-              <ColorCard key={label} className="relative overflow-hidden">
-                <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-black/5 blur-2xl" aria-hidden />
-                <div className="flex items-center gap-3">
-                  {Icon ? (
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 bg-white">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                  ) : null}
-                  <div>
-                    <div className="text-xs uppercase tracking-wide text-black/60">{label}</div>
-                    <div className="text-2xl font-bold leading-tight">{value}</div>
-                  </div>
+          <div className="grid gap-6 sm:grid-cols-3">
+            {stats.map(({ label, value, icon: Icon, color, bg }) => (
+              <div key={label} className="group p-8 rounded-[2rem] bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                <div className={cn("inline-flex p-4 rounded-2xl mb-6 transition-transform group-hover:scale-110", bg, color)}>
+                  <Icon className="size-6" />
                 </div>
-              </ColorCard>
+                <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">{label}</div>
+                <div className="text-4xl font-black text-navy">{value}</div>
+              </div>
             ))}
           </div>
         </Reveal>
       </Section>
 
-      {/* Transparency + KPIs */}
-      <Section>
-        <div className="grid gap-6 md:grid-cols-2">
+      {/* 4. ALLOCATION: Transparency Bars */}
+      <Section container="section-tight">
+        <div className="grid gap-12 lg:grid-cols-2 items-center">
           <Reveal>
-            <ColorCard>
-              <h3 className="text-xl font-bold">Where Your Donations Go</h3>
-              <p className="mt-1 text-sm text-black/70">
-                We prioritize direct learner support first, then essential operations.
-              </p>
-
-              {/* Bars */}
-              <div className="mt-4 space-y-4">
+            <div className="bg-navy text-white p-10 md:p-14 rounded-[3.5rem] shadow-2xl shadow-navy/20">
+              <div className="flex items-center gap-3 mb-8">
+                <FileSpreadsheet className="size-6 text-sky-400" />
+                <h3 className="text-3xl font-black">Fund Allocation</h3>
+              </div>
+              <div className="space-y-6">
                 {transparency.map((item) => (
                   <div key={item.label}>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="font-medium">{item.label}</span>
-                      <span className="text-black/60">{item.pct}%</span>
+                    <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest mb-3">
+                      <span className="text-white/60">{item.label}</span>
+                      <span className="text-sky-400">{item.pct}%</span>
                     </div>
-                    <div className="mt-2 h-2.5 w-full rounded-full bg-black/10">
+                    <div className="h-2 w-full rounded-full bg-white/10 overflow-hidden">
                       <div
-                        className="h-2.5 rounded-full bg-black transition-[width] duration-700"
-                        style={{ width: `${Math.min(100, Math.max(0, item.pct))}%` }}
-                        aria-label={`${item.label} ${item.pct}%`}
+                        className={cn("h-full rounded-full transition-all duration-1000", item.color)}
+                        style={{ width: `${item.pct}%` }}
                       />
                     </div>
                   </div>
                 ))}
               </div>
-
-              <p className="mt-4 text-xs text-black/60">
-                Figures are indicative and updated termly; funds are used where the need is greatest.
+              <p className="mt-10 text-[10px] text-white/40 leading-relaxed italic">
+                * Allocation percentages are determined by the School Management Committee based on termly priority needs.
               </p>
-            </ColorCard>
+            </div>
           </Reveal>
 
-          <Reveal delay={0.05}>
-            <ColorCard>
-              <h3 className="text-xl font-bold">KPIs (this year)</h3>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-black/85">
-                <li>Students Supported: 85 (+12% vs last year)</li>
-                <li>Meals Served: 12,400 (+18%)</li>
-                <li>Books Purchased: 1,150 (+9%)</li>
-              </ul>
-            </ColorCard>
-          </Reveal>
-        </div>
-      </Section>
-
-      {/* Milestones timeline */}
-      <Section>
-        <Reveal>
-          <ColorCard>
-            <h3 className="text-xl font-bold">Milestones</h3>
-            <ol className="mt-4 space-y-5">
-              {milestones.map((m, i) => (
-                <li key={i} className="relative pl-6">
-                  <span
-                    className="absolute left-0 top-1.5 h-3 w-3 rounded-full border border-black/20 bg-white"
-                    aria-hidden
-                  />
-                  <div className="text-xs uppercase tracking-wide text-black/60">{m.when}</div>
-                  <div className="font-semibold">{m.title}</div>
-                  <div className="text-sm text-black/80">{m.text}</div>
-                </li>
-              ))}
-            </ol>
-          </ColorCard>
-        </Reveal>
-      </Section>
-
-      {/* Reports & downloads */}
-      <Section>
-        <div className="grid gap-6 md:grid-cols-2">
-          <Reveal>
-            <ColorCard>
-              <h3 className="text-xl font-bold">Reports & Downloads</h3>
-              <p className="mt-1 text-sm text-black/70">
-                Annual summaries, budgets, and audit notes—available to everyone.
-              </p>
-              <div className="mt-4 space-y-3">
-                {/* Replace hrefs with real links */}
-                <DownloadRow label="2024 Annual Report (PDF)" href="#" />
-                <DownloadRow label="Budget Allocation (XLSX)" href="#" />
-                <DownloadRow label="Meals Program Summary (PDF)" href="#" />
-              </div>
-              <div className="mt-4 flex gap-3">
-                <Button variant="outline">
-                  <FileText className="mr-2 h-4 w-4" /> Download 2024 Report
-                </Button>
-                <Button>
-                  View All <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </ColorCard>
-          </Reveal>
-
-          {/* CTA back to Donate */}
-          <Reveal delay={0.05}>
-            <ColorCard className="flex flex-col justify-between">
-              <div>
-                <h3 className="text-xl font-bold">Make an Immediate Difference</h3>
-                <p className="mt-2 text-black/80">
-                  Donate via Mobile Money (UGX) to <span className="font-semibold">+256 757 158 407</span>. Your support
-                  fuels books, meals, and classroom essentials.
+          {/* Verification & Reports */}
+          <div className="space-y-8">
+            <Reveal delay={0.1}>
+              <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                <div className="flex items-center gap-3 mb-6">
+                  <CalendarCheck className="size-6 text-green-500" />
+                  <h4 className="text-xl font-bold text-navy">Transaction Verification</h4>
+                </div>
+                <p className="text-sm text-slate-500 leading-relaxed mb-8">
+                  Since Mobile Money donations are manual, please forward your transaction confirmation to our admin office to receive an official school receipt.
                 </p>
+                <Button asChild className="w-full py-6 rounded-2xl">
+                    <a href="https://wa.me/256757158407" target="_blank" rel="noreferrer">
+                        Verify via WhatsApp
+                    </a>
+                </Button>
               </div>
-              <div className="mt-4">
-                <a
-                  href="/donate#donate-now"
-                  className="inline-flex items-center justify-center rounded-xl bg-black px-5 py-3 text-white transition hover:opacity-90"
-                >
-                  Donate Now
-                </a>
+            </Reveal>
+
+            <Reveal delay={0.2}>
+              <div className="bg-slate-100 p-8 rounded-[2.5rem] border border-slate-200 border-dashed">
+                <h4 className="font-bold text-navy mb-4">Audited Reports</h4>
+                <div className="space-y-2">
+                  <DownloadRow label="Term 2 Financial Summary" />
+                  <DownloadRow label="2024 Annual Impact Audit" />
+                </div>
               </div>
-            </ColorCard>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
       </Section>
     </div>
   );
 }
 
-/* ---------- small internal component ---------- */
-
-function DownloadRow({ label, href }: { label: string; href: string }) {
+function DownloadRow({ label }: { label: string }) {
   return (
-    <a
-      href={href}
-      className="group flex items-center justify-between rounded-xl border border-black/10 bg-white px-3 py-2 text-sm hover:bg-black/5"
-    >
-      <span className="font-medium">{label}</span>
-      <span className="text-xs text-black/50 group-hover:underline">Open</span>
-    </a>
+    <button className="w-full flex items-center justify-between px-5 py-3 rounded-xl bg-white text-xs font-bold text-navy border border-slate-200 hover:border-navy transition-all group">
+      <span>{label}</span>
+      <Download className="size-3 opacity-30 group-hover:opacity-100" />
+    </button>
   );
 }

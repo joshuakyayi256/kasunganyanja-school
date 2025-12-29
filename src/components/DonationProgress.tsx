@@ -1,4 +1,5 @@
-// src/components/DonationProgress.tsx
+import { motion } from "framer-motion";
+
 type Props = {
   targetUGX: number;
   currentUGX: number;
@@ -12,46 +13,46 @@ export default function DonationProgress({
   title = "Campaign Progress",
   note = "Every gift helps us reach more learners.",
 }: Props) {
-  const pct = Math.max(
-    0,
-    Math.min(100, Math.round((currentUGX / Math.max(targetUGX, 1)) * 100))
-  );
-
-  const fmt = (n: number) =>
-    `UGX ${n.toLocaleString("en-UG", { maximumFractionDigits: 0 })}`;
+  const pct = Math.max(0, Math.min(100, Math.round((currentUGX / Math.max(targetUGX, 1)) * 100)));
+  const fmt = (n: number) => `UGX ${n.toLocaleString("en-UG")}`;
 
   return (
-    <div className="rounded-2xl border border-black/10 bg-white p-4 md:p-5">
-      <div className="flex items-center justify-between gap-3">
-        <h3 className="text-lg md:text-xl font-bold text-navy">{title}</h3>
-        <div className="text-sm text-black/70">{pct}%</div>
-      </div>
-
-      <div
-        role="progressbar"
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={pct}
-        className="mt-3 h-3 w-full rounded-full bg-black/10 overflow-hidden"
-      >
-        <div
-          className="h-full rounded-full bg-navy transition-[width] duration-700"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-
-      <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
-        <div className="rounded-xl border border-black/10 bg-black/5 px-3 py-2">
-          <div className="text-black/60">Raised</div>
-          <div className="font-semibold">{fmt(currentUGX)}</div>
+    <div className="rounded-[2rem] bg-white p-6 md:p-8 shadow-2xl shadow-navy/5 border border-slate-50">
+      <div className="flex items-end justify-between mb-4">
+        <div>
+          <h3 className="text-2xl font-black text-navy leading-none">{title}</h3>
+          <p className="mt-2 text-sm text-slate-500 font-medium">{note}</p>
         </div>
-        <div className="rounded-xl border border-black/10 bg-black/5 px-3 py-2">
-          <div className="text-black/60">Goal</div>
-          <div className="font-semibold">{fmt(targetUGX)}</div>
+        <div className="text-right">
+          <span className="text-3xl font-black text-navy">{pct}%</span>
+          <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400">Complete</div>
         </div>
       </div>
 
-      <p className="mt-3 text-xs text-black/60">{note}</p>
+      {/* Premium Progress Bar */}
+      <div className="relative h-4 w-full rounded-full bg-slate-100 overflow-hidden shadow-inner">
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: `${pct}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5, ease: "circOut" }}
+          className="h-full rounded-full bg-gradient-to-r from-navy to-blue-500 relative"
+        >
+          {/* Subtle "shimmer" effect */}
+          <div className="absolute inset-0 bg-white/20 animate-pulse" />
+        </motion.div>
+      </div>
+
+      <div className="mt-6 grid grid-cols-2 gap-4">
+        <div className="p-4 rounded-2xl bg-navy/[0.03] border border-navy/5">
+          <div className="text-[10px] uppercase tracking-wider font-bold text-navy/50 mb-1">Raised</div>
+          <div className="text-lg font-black text-navy">{fmt(currentUGX)}</div>
+        </div>
+        <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+          <div className="text-[10px] uppercase tracking-wider font-bold text-slate-400 mb-1">Goal</div>
+          <div className="text-lg font-black text-slate-600">{fmt(targetUGX)}</div>
+        </div>
+      </div>
     </div>
   );
 }

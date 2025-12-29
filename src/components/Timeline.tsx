@@ -1,11 +1,6 @@
-// src/components/Timeline.tsx
-
-/** Milestone type */
-export type Milestone = {
-  year: string;
-  title: string;
-  text?: string;
-};
+import { Milestone } from "../types"; // Or keep your inline type
+import { cn } from "../lib/cn";
+import { History } from "lucide-react";
 
 export default function Timeline({
   title = "Our Journey",
@@ -15,57 +10,40 @@ export default function Timeline({
   items: Milestone[];
 }) {
   return (
-    <section className="px-4">
-      <div
-        className={[
-          "max-w-6xl mx-auto",
-          // rounded navy card
-          "rounded-3xl border border-black/10 bg-[#0f2e4a] text-white",
-          "shadow-[0_20px_60px_rgba(0,0,0,0.12)]",
-          "px-6 md:px-10 py-8 md:py-10",
-        ].join(" ")}
-      >
-        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-6">
-          {title}
-        </h2>
+    <div className="relative p-10 md:p-16 rounded-[3.5rem] bg-navy text-white overflow-hidden shadow-2xl shadow-navy/20">
+      {/* Decorative Glow */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 blur-[80px] rounded-full -mr-32 -mt-32" />
 
-        {/* vertical line */}
-        <ol className="relative ml-2 before:content-[''] before:absolute before:left-[7px] before:top-1 before:bottom-1 before:w-[2px] before:bg-gradient-to-b before:from-white/30 before:to-white/10">
-          {items?.map((m, i) => (
-            <li
-              key={`${m.year}-${m.title}-${i}`}
-              className="relative pl-8 pb-6 last:pb-0 group"
-            >
-              {/* dot + soft ping */}
-              <span className="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-[#F5B301] ring-4 ring-white/10" />
-              <span className="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-[#F5B301] animate-ping opacity-40" />
-
-              {/* content */}
-              <div className="text-sm opacity-80">{m.year}</div>
-              <div
-                className={[
-                  "mt-0.5 font-semibold text-white",
-                  "transition-transform duration-500 ease-out",
-                  "group-hover:translate-x-0.5",
-                ].join(" ")}
-              >
-                {m.title}
-              </div>
-              {m.text && (
-                <p
-                  className={[
-                    "mt-1 text-white/85",
-                    "transition-opacity duration-500 ease-out",
-                    "group-hover:opacity-100",
-                  ].join(" ")}
-                >
-                  {m.text}
-                </p>
-              )}
-            </li>
-          ))}
-        </ol>
+      <div className="flex items-center gap-4 mb-12">
+        <div className="p-3 rounded-2xl bg-white/10 text-sky-400">
+          <History className="size-6" />
+        </div>
+        <h2 className="text-4xl font-black tracking-tight">{title}</h2>
       </div>
-    </section>
+
+      <ol className="relative ml-4 border-l-2 border-white/10 space-y-12">
+        {items?.map((m, i) => (
+          <li key={i} className="relative pl-10 group">
+            {/* Timeline Indicator */}
+            <div className="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full border-4 border-navy bg-amber-400 ring-4 ring-white/5 group-hover:scale-125 transition-transform duration-300" />
+            
+            {/* Year Badge */}
+            <div className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-white/50 mb-3">
+              {m.year}
+            </div>
+
+            <h4 className="text-xl font-bold text-white mb-2 group-hover:text-sky-400 transition-colors">
+              {m.title}
+            </h4>
+            
+            {m.text && (
+              <p className="text-white/60 leading-relaxed text-sm max-w-2xl">
+                {m.text}
+              </p>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }

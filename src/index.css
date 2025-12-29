@@ -63,3 +63,11 @@ a { @apply transition-colors; }
 @media (min-resolution: 2dppx) {
   .bg-gradient-to-br { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
 }
+
+@keyframes slow-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+.animate-slow-zoom {
+  animation: slow-zoom 20s infinite alternate ease-in-out;
+}

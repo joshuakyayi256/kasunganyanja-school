@@ -4,9 +4,9 @@ import { cn } from "../lib/cn";
 
 /** size: md ~55svh, lg ~65svh, xl ~75svh */
 const SIZE_MAP = {
-  md: "min-h-[55svh]",
-  lg: "min-h-[65svh]",
-  xl: "min-h-[75svh]",
+  md: "min-h-[60svh]", // Increased slightly to give more room for text
+  lg: "min-h-[75svh]",
+  xl: "min-h-[85svh]",
 };
 
 export default function PageHero({
@@ -16,7 +16,7 @@ export default function PageHero({
   bgImage,
   className,
   size = "xl",
-  tint = "light",
+  tint = "navy",
 }: {
   title: string;
   subtitle?: string;
@@ -28,44 +28,89 @@ export default function PageHero({
 }) {
   return (
     <section
-      className={cn("relative overflow-hidden", SIZE_MAP[size], className)}
+      className={cn(
+        "relative flex flex-col justify-center overflow-hidden", 
+        SIZE_MAP[size], 
+        className
+      )}
     >
+      {/* 1. IMAGE & SMART OVERLAYS */}
       {bgImage && (
         <>
           <img
             src={bgImage}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover scale-105 animate-slow-zoom"
           />
-          {tint === "navy" && <div className="absolute inset-0 bg-navy/30" />}
-          {tint === "gold" && (
-            <div className="absolute inset-0 bg-[#F5B301]/25" />
-          )}
-          {tint === "light" && <div className="absolute inset-0 bg-white/55" />}
-          <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-skywash to-transparent" />
+          {/* Use a radial gradient or vignette for a more premium look than a flat overlay */}
+          <div className={cn(
+            "absolute inset-0 transition-opacity duration-700",
+            tint === "navy" && "bg-gradient-to-r from-navy/90 via-navy/40 to-transparent",
+            tint === "gold" && "bg-gradient-to-r from-amber-900/80 via-transparent to-transparent",
+            tint === "light" && "bg-gradient-to-r from-white/90 via-white/20 to-transparent"
+          )} />
+          
+          {/* Top Fade - protects the NavBar readability */}
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/40 to-transparent opacity-60" />
         </>
       )}
 
-      <div className="relative max-w-6xl mx-auto px-4 pt-[96px] pb-12 md:pb-16">
-        <motion.h1
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-5xl md:text-6xl font-extrabold tracking-tight text-black"
-        >
-          {title}
-        </motion.h1>
-        {subtitle && (
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.05 }}
-            className="mt-4 max-w-3xl text-lg md:text-xl text-black/80"
+      {/* 2. CONTENT CONTAINER */}
+      <div className="relative w-full max-w-6xl mx-auto px-6 py-24 md:py-32">
+        <div className="max-w-4xl">
+          {/* Optional: Small "Eyebrow" text for context */}
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className={cn(
+              "inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-6",
+              tint === "navy" ? "bg-white/10 text-white/80" : "bg-navy/10 text-navy"
+            )}
           >
-            {subtitle}
-          </motion.p>
-        )}
-        {right && <div className="mt-6">{right}</div>}
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+            </span>
+            Admissions Open
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className={cn(
+              "text-5xl md:text-7xl font-black tracking-tight leading-[1.1]",
+              tint === "navy" ? "text-white" : "text-navy"
+            )}
+          >
+            {title}
+          </motion.h1>
+
+          {subtitle && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className={cn(
+                "mt-6 max-w-2xl text-lg md:text-xl leading-relaxed",
+                tint === "navy" ? "text-white/80" : "text-slate-600"
+              )}
+            >
+              {subtitle}
+            </motion.p>
+          )}
+
+          {/* 3. CTA AREA */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mt-10"
+          >
+            {right}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

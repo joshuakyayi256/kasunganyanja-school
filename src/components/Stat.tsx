@@ -1,26 +1,45 @@
-// src/components/Stat.tsx
 import { useEffect, useRef, useState } from "react";
+import { useInView } from "framer-motion";
 
 export default function Stat({
-    value, duration = 1000, className,
+  value,
+  duration = 2000,
+  className,
+  suffix = "",
 }: {
-    value: number;
-    duration?: number;
-    className?: string;
+  value: number;
+  duration?: number;
+  className?: string;
+  suffix?: string;
 }) {
-    const [n, setN] = useState(0);
-    const start = useRef<number | null>(null); // ✅ give ref an initial value
+  const [count, setCount] = useState(0);
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true });
+  const startTimestamp = useRef<number | null>(null);
 
-    useEffect(() => {
-        const animate = (t: number) => {
-            if (start.current === null) start.current = t;
-            const p = Math.min(1, (t - start.current) / duration);
-            setN(Math.round(value * p));
-            if (p < 1) requestAnimationFrame(animate);
-        };
-        const id = requestAnimationFrame(animate);
-        return () => cancelAnimationFrame(id);
-    }, [value, duration]);
+  useEffect(() => {
+    if (!isInView) return;
 
-    return <span className={className}>{n}</span>;
+    const step = (timestamp: number) => {
+      if (!startTimestamp.current) startTimestamp.current = timestamp;
+      const progress = Math.min((timestamp - startTimestamp.current) / duration, 1);
+      
+      // Easing function: Cubic Out (starts fast, ends slow)
+      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+      
+      setCount(Math.floor(easeOutCubic * value));
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  }, [value, duration, isInView]);
+
+  return (
+    <span ref={containerRef} className={className}>
+      {count.toLocaleString()}{suffix}
+    </span>
+  );
 }

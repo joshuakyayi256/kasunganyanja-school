@@ -1,9 +1,11 @@
-// src/pages/News.tsx
 import PageHero from "../components/PageHero";
 import Section from "../components/Section";
 import ColorCard from "../components/ColorCard";
 import Reveal from "../components/Reveal";
 import Button from "../components/ui/Button";
+import Badge from "../components/ui/Badge";
+import { Calendar, Clock, ExternalLink, Newspaper, BookOpen } from "lucide-react";
+import { cn } from "../lib/cn";
 
 // ---------- Types ----------
 type Post = {
@@ -15,7 +17,7 @@ type Post = {
   url: string;
   tags?: string[];
   readMins?: number;
-  cover?: string; // optional image path/url
+  cover?: string;
 };
 
 type EventItem = {
@@ -26,14 +28,13 @@ type EventItem = {
   location?: string;
 };
 
-// ---------- Legit articles (external) ----------
+// ---------- External Articles ----------
 const POSTS: Post[] = [
   {
     id: 101,
     title: "Uganda’s 2024 PLE results show improvement over 2023",
     date: "2025-01-23",
-    excerpt:
-      "UNEB reported better overall performance in the 2024 Primary Leaving Examinations compared to 2023, with over 732,000 candidates passing.",
+    excerpt: "UNEB reported better overall performance in the 2024 Primary Leaving Examinations compared to 2023.",
     source: "SoftPower / UNEB",
     url: "https://softpower.ug/over-732000-candidates-pass-ple-2024/",
     tags: ["Assessment", "PLE", "UNEB"],
@@ -43,72 +44,27 @@ const POSTS: Post[] = [
     id: 102,
     title: "Spotlight on primary completion & foundational learning in Uganda",
     date: "2024-04-18",
-    excerpt:
-      "UNESCO’s GEM blog highlights Uganda’s Early Grade Reading programme—now covering ~80% of public primary schools and 6M pupils—showing improved learning in P3.",
+    excerpt: "UNESCO’s GEM blog highlights Uganda’s Early Grade Reading programme covering ~80% of public schools.",
     source: "UNESCO GEM Report",
     url: "https://world-education-blog.org/2024/04/18/shining-the-spotlight-on-primary-completion-and-foundational-learning-in-uganda/",
     tags: ["Foundational Learning", "Reading"],
     readMins: 5,
-  },
-  {
-    id: 103,
-    title: "School meals boost attendance in Karamoja",
-    date: "2024-10-22",
-    excerpt:
-      "UNICEF reports that provision of meals in schools significantly improved attendance in Karamoja, underscoring the impact of nutrition on learning.",
-    source: "UNICEF Uganda",
-    url: "https://www.unicef.org/uganda/stories/provision-meals-school-proves-significant-change-school-attendance-karamoja",
-    tags: ["School Meals", "Attendance", "Nutrition"],
-    readMins: 4,
-  },
-  {
-    id: 104,
-    title: "Uganda Learning Poverty brief",
-    date: "2024-06-14",
-    excerpt:
-      "World Bank’s learning poverty brief explains the share of children unable to read with comprehension by age 10, and why eliminating learning poverty matters.",
-    source: "World Bank",
-    url: "https://documents1.worldbank.org/curated/en/099062624143010228/pdf/P179209113a9980f61a01110448657471c9.pdf",
-    tags: ["Learning Poverty", "Policy"],
-    readMins: 6,
-  },
-  {
-    id: 105,
-    title: "Education & enrollment indicators for Uganda",
-    date: "2024-02-01",
-    excerpt:
-      "UIS/World Bank indicators for primary enrollment and completion offer context on access and progression.",
-    source: "World Bank Data / UIS",
-    url: "https://data.worldbank.org/indicator/SE.PRM.ENRR?locations=UG",
-    tags: ["Data", "Indicators"],
-    readMins: 3,
-  },
+  }
 ];
 
-// ---------- Local school stories (keep yours + add detail) ----------
+// ---------- Local School Stories ----------
 const LOCAL_POSTS: Post[] = [
   {
     id: 1,
     title: "Literacy Fair 2025",
     date: "2025-07-03",
-    excerpt:
-      "Parents and pupils celebrated reading with performances and book swaps. P2–P4 learners showcased Luganda and English read-alouds; 320 books exchanged.",
+    excerpt: "Parents and pupils celebrated reading with performances and book swaps.",
     source: "Kasunganyanja PPS",
-    url: "/news/literacy-fair-2025", // replace if you create a detail page
+    url: "/news/literacy-fair-2025",
     tags: ["School Life", "Reading"],
     readMins: 2,
-  },
-  {
-    id: 2,
-    title: "New Classroom Block",
-    date: "2025-04-22",
-    excerpt:
-      "Repairs completed on two classrooms with community support: new roofing sheets, desks, and chalkboards installed before Term 2.",
-    source: "Kasunganyanja PPS",
-    url: "/news/new-classroom-block-2025", // replace if you create a detail page
-    tags: ["Infrastructure"],
-    readMins: 2,
-  },
+    cover: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1000"
+  }
 ];
 
 const EVENTS: EventItem[] = [
@@ -118,17 +74,10 @@ const EVENTS: EventItem[] = [
     date: "2025-10-12",
     info: "Meet teachers, tour classrooms, and view learners’ projects.",
     location: "School compound",
-  },
-  {
-    id: 2,
-    title: "Sports Day",
-    date: "2025-11-08",
-    info: "Inter-house athletics and games; parents welcome.",
-    location: "School field",
-  },
+  }
 ];
 
-// ---------- Helpers ----------
+// ---------- Helper Functions ----------
 function formatDate(iso: string) {
   const d = new Date(iso);
   return d.toLocaleDateString(undefined, {
@@ -144,131 +93,110 @@ function isPast(iso: string) {
   return new Date(iso) < today;
 }
 
-// ---------- Page ----------
 export default function News() {
   const mergedPosts = [...LOCAL_POSTS, ...POSTS].sort(
     (a, b) => +new Date(b.date) - +new Date(a.date)
   );
 
+  const featuredPost = mergedPosts[0];
+  const remainingPosts = mergedPosts.slice(1);
+
   return (
-    <div>
+    <div className="bg-slate-50 min-h-screen pb-20">
       <PageHero
         size="lg"
-        tint="light"
-        title="News & Events"
-        subtitle="Evidence and stories that shape learning — from our classrooms to national data."
+        bgImage="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2000"
+        tint="navy"
+        title="Journal & Updates"
+        subtitle="Stories from our classrooms and national evidence shaping the future of Ugandan education."
       />
 
-      {/* Articles */}
-      <Section>
-        <div className="mb-3 flex items-baseline justify-between">
-          <h3 className="text-2xl font-bold text-navy">Articles</h3>
-          <span className="text-xs text-black/60">
-            Curated from our school & reputable sources
-          </span>
-        </div>
+      {/* Featured Story */}
+      <Section container="section-tight" className="-mt-16 relative z-10">
+        <Reveal>
+          <div className="group relative overflow-hidden rounded-[3rem] bg-white shadow-2xl border border-slate-100 flex flex-col md:flex-row items-stretch min-h-[400px]">
+            <div className="md:w-1/2 relative overflow-hidden">
+               <img 
+                 src={featuredPost.cover || "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1000"} 
+                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                 alt={featuredPost.title}
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
+               <Badge variant="navy" className="absolute top-6 left-6 shadow-lg">Featured Story</Badge>
+            </div>
+            
+            <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+              <div className="flex items-center gap-3 text-xs font-black uppercase tracking-widest text-slate-400 mb-4">
+                <Calendar className="size-3 text-sky-500" />
+                {formatDate(featuredPost.date)}
+              </div>
+              <h2 className="text-3xl md:text-4xl font-black text-navy leading-tight mb-6">
+                {featuredPost.title}
+              </h2>
+              <p className="text-slate-500 text-lg leading-relaxed mb-8">
+                {featuredPost.excerpt}
+              </p>
+              <Button asChild size="lg" className="w-fit rounded-2xl">
+                <a href={featuredPost.url}>Read Full Story</a>
+              </Button>
+            </div>
+          </div>
+        </Reveal>
+      </Section>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          {mergedPosts.map((p, i) => (
-            <Reveal key={p.id} delay={i * 0.05}>
-              <ColorCard className="card-hover relative overflow-hidden">
-                {/* subtle blob */}
-                <div
-                  className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-black/5 blur-2xl"
-                  aria-hidden
-                />
-                <div className="text-xs text-black/60">{formatDate(p.date)}</div>
-                <div className="mt-1 text-lg font-bold text-navy">{p.title}</div>
-                <p className="mt-1 text-black/80">{p.excerpt}</p>
-
-                {/* meta */}
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <span className="rounded-full border border-black/10 bg-white px-2 py-0.5 text-xs">
-                    {p.source}
-                  </span>
-                  {p.tags?.slice(0, 3).map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-black/10 bg-white px-2 py-0.5 text-[11px] text-black/70"
-                    >
-                      #{t}
-                    </span>
-                  ))}
-                  {p.readMins ? (
-                    <span className="ml-auto text-xs text-black/50">
-                      {p.readMins} min read
-                    </span>
-                  ) : null}
+      {/* Grid of Articles */}
+      <Section container="section-tight">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {remainingPosts.map((p, i) => (
+            <Reveal key={p.id} delay={i * 0.1}>
+              <div className="group h-full bg-white rounded-[2.5rem] border border-slate-100 p-8 flex flex-col hover:shadow-2xl transition-all duration-300">
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 mb-4">
+                  {formatDate(p.date)}
                 </div>
-
-                <div className="mt-3">
-                  <Button asChild variant="ghost">
-                    <a href={p.url} target={p.url.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
-                      Read {p.url.startsWith("http") ? "article" : "story"}
-                    </a>
-                  </Button>
+                <h4 className="text-xl font-black text-navy leading-tight mb-4">
+                  {p.title}
+                </h4>
+                <p className="text-slate-500 text-sm leading-relaxed mb-8 flex-grow">
+                  {p.excerpt}
+                </p>
+                <div className="pt-6 border-t border-slate-50 flex items-center justify-between text-xs">
+                   <span className="font-bold text-slate-400 uppercase tracking-tighter">{p.source}</span>
+                   <a href={p.url} target="_blank" className="text-navy hover:text-sky-600">
+                     <ExternalLink className="size-4" />
+                   </a>
                 </div>
-              </ColorCard>
+              </div>
             </Reveal>
           ))}
         </div>
       </Section>
 
-      {/* Events */}
-      <Section>
-        <h3 className="mb-3 text-2xl font-bold text-navy">Events</h3>
-
-        <div className="grid gap-4 md:grid-cols-2">
+      {/* Events Section */}
+      <Section container="section-tight" className="bg-white rounded-[4rem] mx-4 py-24 px-8 border border-slate-100">
+        <h3 className="text-4xl font-black text-navy mb-12">Upcoming Events</h3>
+        <div className="grid gap-6 md:grid-cols-2">
           {EVENTS.map((e, i) => {
             const past = isPast(e.date);
             return (
-              <Reveal key={e.id} delay={i * 0.05}>
-                <ColorCard className="card-hover">
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="text-black/60">{formatDate(e.date)}</div>
-                    <span
-                      className={`rounded-full border px-2 py-0.5 ${
-                        past
-                          ? "border-black/10 bg-white text-black/60"
-                          : "border-black/10 bg-black text-white"
-                      } text-[11px]`}
-                    >
-                      {past ? "Past" : "Upcoming"}
-                    </span>
+              <Reveal key={e.id} delay={i * 0.1}>
+                <div className={cn(
+                  "p-8 rounded-[2.5rem] border flex flex-col sm:flex-row gap-8 items-center",
+                  past ? "bg-slate-50 border-slate-100 opacity-60" : "bg-white border-slate-100 shadow-sm"
+                )}>
+                  <div className={cn(
+                    "flex flex-col items-center justify-center min-w-[100px] h-[100px] rounded-[1.5rem]",
+                    past ? "bg-slate-200 text-slate-500" : "bg-navy text-white"
+                  )}>
+                    <span className="text-3xl font-black">{formatDate(e.date).split(' ')[1]}</span>
                   </div>
-                  <div className="mt-1 text-lg font-bold text-navy">{e.title}</div>
-                  <p className="mt-1 text-black/80">{e.info}</p>
-                  {e.location ? (
-                    <div className="mt-2 text-xs text-black/60">Location: {e.location}</div>
-                  ) : null}
-
-                  <div className="mt-3 flex gap-3">
-                    {!past ? (
-                      <>
-                        <Button variant="outline">RSVP</Button>
-                        <Button asChild>
-                          {/* Simple Google Calendar template (adjust text/times as needed) */}
-                          <a
-                            href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-                              e.title
-                            )}&dates=${e.date.replace(/-/g, "")}T080000Z/${e.date.replace(
-                              /-/g,
-                              ""
-                            )}T100000Z&details=${encodeURIComponent(e.info)}&location=${encodeURIComponent(
-                              e.location ?? ""
-                            )}`}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Add to Calendar
-                          </a>
-                        </Button>
-                      </>
-                    ) : (
-                      <Button variant="ghost">View Photos</Button>
-                    )}
+                  <div className="flex-grow">
+                    <h4 className="text-xl font-bold text-navy mb-2">{e.title}</h4>
+                    <p className="text-slate-500 text-sm mb-4">{e.info}</p>
+                    <div className="flex items-center gap-1 text-xs font-bold text-slate-400 uppercase">
+                       <BookOpen className="size-3" /> {e.location}
+                    </div>
                   </div>
-                </ColorCard>
+                </div>
               </Reveal>
             );
           })}

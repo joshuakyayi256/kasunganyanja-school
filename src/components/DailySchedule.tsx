@@ -1,4 +1,5 @@
 import Card from "./ui/Card";
+import { Clock } from "lucide-react";
 
 const ROWS = [
   ["08:00 – 08:30", "Arrival & Morning Prep"],
@@ -13,28 +14,36 @@ const ROWS = [
 
 export default function DailySchedule() {
   return (
-    <section className="max-w-6xl mx-auto px-4 py-12">
-      <h3 className="text-2xl md:text-3xl font-extrabold text-navy">
-        Daily Schedule (8:00 – 5:00 PM)
-      </h3>
-      <Card className="mt-4 overflow-x-auto">
-        <table className="w-full text-left">
-          <thead className="text-sm text-black/60">
-            <tr>
-              <th className="py-2 pr-4">Time</th>
-              <th className="py-2">Activity</th>
+    <div className="w-full">
+      <div className="flex items-center gap-2 mb-6">
+        <Clock className="size-5 text-navy opacity-50" />
+        <h3 className="text-xl font-bold text-navy">
+          The School Day (8:00 AM – 5:00 PM)
+        </h3>
+      </div>
+      
+      <div className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="bg-slate-50/50">
+              <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">Time</th>
+              <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">Activity</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-slate-50">
             {ROWS.map(([time, activity]) => (
-              <tr key={time} className="border-t border-black/10">
-                <td className="py-3 pr-4 whitespace-nowrap">{time}</td>
-                <td className="py-3">{activity}</td>
+              <tr key={time} className="group hover:bg-navy/[0.02] transition-colors">
+                <td className="py-4 px-6 text-sm font-bold text-navy whitespace-nowrap">
+                  {time}
+                </td>
+                <td className="py-4 px-6 text-sm text-slate-600 group-hover:text-navy transition-colors">
+                  {activity}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </Card>
-    </section>
+      </div>
+    </div>
   );
 }

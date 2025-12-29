@@ -1,124 +1,129 @@
-// src/components/Footer.tsx
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, ArrowRight, HeartHandshake, Facebook, Instagram, Twitter } from "lucide-react";
+import { 
+  Phone, Mail, MapPin, ArrowRight, HeartHandshake, 
+  Facebook, Instagram, Twitter, Sparkles, Send 
+} from "lucide-react";
 import Button from "./ui/Button";
+import { cn } from "../lib/cn";
 
-const linkCls =
-  "text-black/80 hover:text-black font-medium transition-colors inline-flex items-center gap-1";
+const linkCls = "text-white/60 hover:text-white font-medium transition-all duration-200 flex items-center gap-2 group";
 
 export default function Footer() {
   return (
-    <footer className="mt-16">
-      {/* Top wave / color band */}
-      <div className="h-3 w-full bg-navy" />
+    <footer className="relative mt-20">
+      {/* 1. CURVED TRANSITION - Matches your PageHero and Cards */}
+      <div className="absolute top-0 left-0 w-full h-16 bg-white rounded-b-[3rem] z-10" />
 
-      {/* Main footer */}
-      <div className="bg-skyline">
-        <div className="max-w-6xl mx-auto px-4 py-12 grid lg:grid-cols-4 gap-8">
-          {/* Brand & short pitch */}
-          <div>
+      {/* 2. MAIN FOOTER BODY */}
+      <div className="bg-navy text-white pt-24 pb-12">
+        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-12 gap-12">
+          
+          {/* Brand Section - Span 4 columns */}
+          <div className="lg:col-span-4 space-y-6">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-2xl bg-navy/90 grid place-items-center text-white font-extrabold">K</div>
-              <div className="text-2xl font-extrabold text-navy leading-none">
-                Kasunganyanja
-                <div className="text-sm font-medium text-black/70 mt-1">Parents Primary School</div>
+              <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500 to-navy grid place-items-center text-white shadow-xl">
+                <Sparkles className="size-6" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-2xl font-black tracking-tight leading-none">Kasunganyanja</span>
+                <span className="text-xs font-bold text-white/40 uppercase tracking-widest mt-1">Parents Primary School</span>
               </div>
             </div>
-            <p className="mt-4 text-black/80">
-              Licensed mixed day school (P1–P7) serving families in Kasunganyanja Parish, Bunyangabu District—focused on
-              academic excellence, character, and community.
+            
+            <p className="text-white/60 leading-relaxed text-sm max-w-sm">
+              Empowering the next generation in Bunyangabu District through holistic education, 
+              character building, and community engagement. Committed to "Transformation and Success."
             </p>
-            <div className="mt-4 flex gap-2">
-              <a aria-label="Facebook" href="#" className="p-2 rounded-xl border border-black/10 hover:bg-black/5">
-                <Facebook className="size-5 text-navy" />
-              </a>
-              <a aria-label="Instagram" href="#" className="p-2 rounded-xl border border-black/10 hover:bg-black/5">
-                <Instagram className="size-5 text-navy" />
-              </a>
-              <a aria-label="Twitter / X" href="#" className="p-2 rounded-xl border border-black/10 hover:bg-black/5">
-                <Twitter className="size-5 text-navy" />
-              </a>
+
+            <div className="flex gap-3">
+              {[
+                { icon: Facebook, label: "Facebook" },
+                { icon: Instagram, label: "Instagram" },
+                { icon: Twitter, label: "Twitter" }
+              ].map((social) => (
+                <a 
+                  key={social.label}
+                  aria-label={social.label} 
+                  href="#" 
+                  className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all"
+                >
+                  <social.icon className="size-5 text-white/80" />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Quick links */}
-          <div>
-            <h4 className="text-lg font-bold text-navy">Explore</h4>
-            <ul className="mt-3 space-y-2">
-              <li><Link to="/" className={linkCls}>Home</Link></li>
-              <li><Link to="/about" className={linkCls}>About</Link></li>
+          {/* Quick Links - Span 2 columns */}
+          <div className="lg:col-span-2">
+            <h4 className="text-sm font-black uppercase tracking-widest text-white/40 mb-6">Explore</h4>
+            <ul className="space-y-4">
+              <li><Link to="/about" className={linkCls}>About Us</Link></li>
               <li><Link to="/academics" className={linkCls}>Academics</Link></li>
+              <li><Link to="/admissions" className={linkCls}>Admissions</Link></li>
+              <li><Link to="/impact" className={linkCls}>Our Impact</Link></li>
               <li><Link to="/gallery" className={linkCls}>Gallery</Link></li>
-              <li><Link to="/contact" className={linkCls}>Contact & Admissions</Link></li>
             </ul>
           </div>
 
-          {/* Give / Support (no MoMo card) */}
-          <div>
-            <h4 className="text-lg font-bold text-navy">Support</h4>
-            <div className="mt-3 space-y-3">
-              <Link to="/donate" className={linkCls}>
-                <HeartHandshake className="size-4 text-navy" /> Donate to the School
-              </Link>
-              <Link to="/contact" className={linkCls}>
-                <ArrowRight className="size-4 text-navy" /> Sponsor a Child
-              </Link>
-              <a
-                href="https://wa.me/?text=I%20want%20to%20support%20Kasunganyanja%20Parents%20Primary%20School"
-                className={linkCls}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <ArrowRight className="size-4 text-navy" /> Share on WhatsApp
-              </a>
-            </div>
+          {/* Support - Span 2 columns */}
+          <div className="lg:col-span-2">
+            <h4 className="text-sm font-black uppercase tracking-widest text-white/40 mb-6">Support</h4>
+            <ul className="space-y-4">
+              <li>
+                <Link to="/donate" className={cn(linkCls, "text-sky-400 hover:text-sky-300 font-bold")}>
+                  <HeartHandshake className="size-4" /> Donate Now
+                </Link>
+              </li>
+              <li><Link to="/sponsor" className={linkCls}>Sponsor a Child</Link></li>
+              <li><Link to="/contact" className={linkCls}>Partner with Us</Link></li>
+            </ul>
           </div>
 
-          {/* Contact / Newsletter */}
-          <div>
-            <h4 className="text-lg font-bold text-navy">Contact</h4>
-            <ul className="mt-3 space-y-2 text-black/85">
-              <li className="flex items-center gap-2">
-                <Phone className="size-4 text-navy" />
-                <a href="tel:+256757158407" className="hover:underline">+256 757 158 407</a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail className="size-4 text-navy" />
-                <a href="mailto:baniinah@gmail.com" className="hover:underline">baniinah@gmail.com</a>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="size-4 text-navy mt-1" />
-                <span>Kasunganyanja Parish, Kibiito Sub County, Bunyangabu District, Uganda</span>
-              </li>
-            </ul>
-
+          {/* Newsletter / Contact - Span 4 columns */}
+          <div className="lg:col-span-4">
+            <h4 className="text-sm font-black uppercase tracking-widest text-white/40 mb-6">Stay Updated</h4>
+            <p className="text-white/60 text-sm mb-4">Join our newsletter to receive stories of impact from our students.</p>
+            
             <form
-              className="mt-4 grid grid-cols-[1fr_auto] gap-2"
-              onSubmit={(e)=>{ e.preventDefault(); alert("Thanks! We'll keep you updated."); }}
+              className="relative mb-8"
+              onSubmit={(e)=>{ e.preventDefault(); alert("Welcome to our community!"); }}
             >
               <input
-                className="rounded-xl border border-black/20 bg-white px-3 py-2"
+                className="w-full rounded-2xl bg-white/5 border border-white/10 px-5 py-4 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-all"
                 type="email"
-                placeholder="Your email"
-                aria-label="Email address"
+                placeholder="Enter your email"
                 required
               />
-              <Button type="submit">Join</Button>
+              <button 
+                type="submit" 
+                className="absolute right-2 top-2 bottom-2 px-4 rounded-xl bg-white text-navy font-bold text-xs hover:bg-sky-100 transition-colors"
+              >
+                Join
+              </button>
             </form>
+
+            <div className="space-y-3 text-sm text-white/60">
+              <div className="flex items-center gap-3">
+                <Phone className="size-4 text-sky-400" />
+                <a href="tel:+256757158407" className="hover:text-white">+256 757 158 407</a>
+              </div>
+              <div className="flex items-start gap-3">
+                <MapPin className="size-4 text-sky-400 mt-1" />
+                <span className="leading-tight">Kibiito Sub County, Bunyangabu District, Uganda</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom bar */}
-      <div className="bg-navy text-white">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center gap-3 justify-between">
-          <div className="text-sm">
-            © {new Date().getFullYear()} Kasunganyanja Parents Primary School. All rights reserved.
+        {/* 3. SUB-FOOTER */}
+        <div className="max-w-6xl mx-auto px-6 mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="text-xs text-white/40 font-medium">
+            © {new Date().getFullYear()} Kasunganyanja Parents Primary School. 
+            <span className="hidden md:inline ml-2">Licensed P1–P7 Educational Institution.</span>
           </div>
-          <div className="flex gap-4 text-sm">
-            <Link to="/about" className="text-white/80 hover:text-white">About</Link>
-            <Link to="/contact" className="text-white/80 hover:text-white">Admissions</Link>
-            <Link to="/donate" className="text-white/80 hover:text-white">Donate</Link>
+          <div className="flex gap-8 text-[10px] uppercase tracking-widest font-bold text-white/40">
+            <Link to="/contact" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/contact" className="hover:text-white transition-colors">Terms of Use</Link>
           </div>
         </div>
       </div>
