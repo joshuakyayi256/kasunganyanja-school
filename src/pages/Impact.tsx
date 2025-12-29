@@ -18,6 +18,13 @@ import {
   BookOpen
 } from "lucide-react";
 import { cn } from "../lib/cn";
+import SEO from "../components/SEO";
+
+<SEO 
+  title="Transparency & Financial Impact" 
+  description="See how your donations transform lives. View our termly financial audits and manual reconciliation reports for student welfare." 
+  path="/impact" 
+/>
 
 export default function Impact() {
   // Update these manually after school administrative audits

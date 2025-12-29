@@ -9,6 +9,7 @@ import ObjectivesStrip from "../components/ObjectivesStrip";
 import { cn } from "../lib/cn";
 import { Book, ArrowRight, Star, Users, Award, GraduationCap } from "lucide-react";
 import Button from "../components/ui/Button";
+import SEO from "../components/SEO";
 
 type Club = { title: string; text: string; img?: string };
 
@@ -53,6 +54,12 @@ const CLUBS: Club[] = [
     img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800",
   },
 ];
+
+<SEO 
+  title="Curriculum & Learning" 
+  description="Explore our P1–P7 national curriculum, daily school schedule, and extracurricular clubs including sports and debate." 
+  path="/academics" 
+/>
 
 export default function Academics() {
   const [tab, setTab] = useState<"lower" | "upper">("lower");
@@ -161,7 +168,7 @@ export default function Academics() {
         <div className="max-w-4xl mx-auto text-center mb-16 px-6">
           <Reveal>
             <h2 className="text-4xl md:text-5xl font-black mb-6">The Daily Rhythm</h2>
-            <p className="text-b/60 text-lg">A balanced day of academic rigor, physical activity, and character development.</p>
+            <p className="text-black/60 text-lg">A balanced day of academic rigor, physical activity, and character development.</p>
           </Reveal>
         </div>
         <DailySchedule />

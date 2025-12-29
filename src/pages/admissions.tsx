@@ -6,6 +6,13 @@ import VisitScheduler from "../components/VisitScheduler";
 import Button from "../components/ui/Button";
 import Reveal from "../components/Reveal";
 import { FileText, Coins, ClipboardCheck, Calendar } from "lucide-react";
+import SEO from "../components/SEO";
+
+<SEO 
+  title="Admissions & Enrollment" 
+  description="Apply to Kasunganyanja Parents Primary School. View our P1–P7 admission process, requirements, and schedule a campus visit in Bunyangabu." 
+  path="/admissions" 
+/>
 
 export default function Admissions() {
   return (

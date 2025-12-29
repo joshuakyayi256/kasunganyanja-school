@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin # If you ever add a private admin area
+
+Sitemap: https://www.kasunganyanjaprimary.org/sitemap.xml
