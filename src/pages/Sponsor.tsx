@@ -26,12 +26,15 @@ const MOCK = [
 ];
 
 export default function Sponsor() {
+  // Pre-filled WhatsApp message for the school admin
+  const whatsappUrl = "https://wa.me/256757158407?text=Hello%20Kasunganyanja%20PPS%2C%20I%20would%20like%20to%20inquire%20about%20sponsoring%20a%20learner.";
+
   return (
     <div className="bg-slate-50 min-h-screen pb-24">
-      {/* 1. HERO: Setting the Emotional Tone */}
+      {/* 1. HERO: Using 'smiles1.jpg' to show the joy your support brings */}
       <PageHero
         size="lg"
-        bgImage="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=2000"
+        bgImage="/images/smiles1.jpg"
         tint="navy"
         title="Sponsor a Child"
         subtitle="Your steady monthly support ensures a child stays in school, receives nutritious meals, and has the materials to succeed."
@@ -40,8 +43,8 @@ export default function Sponsor() {
       {/* 2. SPONSORSHIP CARDS: Empathy-driven UI */}
       <Section container="section-tight" className="-mt-16 relative z-10">
         <div className="text-center mb-12">
-            <Badge variant="navy" className="mb-4">Immediate Opportunity</Badge>
-            <h2 className="text-3xl font-black text-navy">Learners Awaiting Support</h2>
+            <Badge variant="navy" className="mb-4 uppercase tracking-widest">Immediate Opportunity</Badge>
+            <h2 className="text-4xl font-black text-navy tracking-tight">Learners Awaiting Support</h2>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
@@ -70,12 +73,12 @@ export default function Sponsor() {
                     </div>
                     
                     <Button
-                        className="w-full py-6 rounded-2xl shadow-lg shadow-navy/10"
-                        onClick={() =>
-                            alert("This action triggers the school's manual subscription guide.")
-                        }
+                        asChild
+                        className="w-full py-6 rounded-2xl shadow-lg shadow-navy/10 font-black"
                     >
-                        Sponsor {s.name}
+                        <a href={whatsappUrl} target="_blank" rel="noreferrer">
+                           Sponsor {s.name}
+                        </a>
                     </Button>
                 </div>
 
@@ -89,7 +92,29 @@ export default function Sponsor() {
         </div>
       </Section>
 
-      {/* 3. SAFEGUARDING: Building Trust */}
+      {/* 3. VISUAL IMPACT: Using 'girlsbacktoback.jpg' to show community */}
+      <Section container="section-tight">
+        <div className="relative rounded-[3.5rem] overflow-hidden min-h-[450px] flex items-center shadow-2xl">
+            <img 
+               src="/images/girlsbacktoback.jpg" 
+               className="absolute inset-0 w-full h-full object-cover" 
+               alt="Kasunganyanja Learners"
+            />
+            <div className="absolute inset-0 bg-navy/40" />
+            <div className="relative p-8 md:p-16 text-white max-w-xl">
+               <h3 className="text-4xl font-black mb-6">Change a Life Today</h3>
+               <p className="text-white/90 text-lg leading-relaxed mb-8">
+                  Your sponsorship provides more than just school fees; it gives a child the confidence to dream and the 
+                  tools to build a successful future within their community.
+               </p>
+               <Button asChild variant="white" className="rounded-2xl px-8 h-14 font-black">
+                  <a href={whatsappUrl}>Inquire About Sponsorship</a>
+               </Button>
+            </div>
+        </div>
+      </Section>
+
+      {/* 4. SAFEGUARDING: Building Trust */}
       <Section container="section-tight">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
             <Reveal>
@@ -112,13 +137,13 @@ export default function Sponsor() {
                     { icon: GraduationCap, label: "Direct Support", text: "Funds are used for meals, fees, and books." }
                 ].map((item, i) => (
                     <Reveal key={i} delay={i * 0.1}>
-                        <div className="flex items-start gap-4 p-6 rounded-3xl bg-white border border-slate-50 shadow-sm">
+                        <div className="flex items-start gap-4 p-6 rounded-3xl bg-white border border-slate-50 shadow-sm hover:shadow-md transition-shadow">
                             <div className="p-2 rounded-xl bg-navy/5 text-navy">
                                 <item.icon className="size-5" />
                             </div>
                             <div>
                                 <h4 className="font-bold text-navy">{item.label}</h4>
-                                <p className="text-sm text-slate-400">{item.text}</p>
+                                <p className="text-sm text-slate-400 font-medium">{item.text}</p>
                             </div>
                         </div>
                     </Reveal>

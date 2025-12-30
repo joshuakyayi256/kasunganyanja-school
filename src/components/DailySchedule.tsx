@@ -1,5 +1,5 @@
-import Card from "./ui/Card";
 import { Clock } from "lucide-react";
+import { cn } from "../lib/cn";
 
 const ROWS = [
   ["08:00 – 08:30", "Arrival & Morning Prep"],
@@ -14,35 +14,48 @@ const ROWS = [
 
 export default function DailySchedule() {
   return (
-    <div className="w-full">
-      <div className="flex items-center gap-2 mb-6">
-        <Clock className="size-5 text-navy opacity-50" />
-        <h3 className="text-xl font-bold text-navy">
-          The School Day (8:00 AM – 5:00 PM)
-        </h3>
-      </div>
-      
-      <div className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm">
+    <div className="w-full max-w-4xl mx-auto">
+      {/* Container adjusted to 'glass' effect. 
+        Using white/10 background to look premium against the Navy Section.
+      */}
+      <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-md shadow-2xl">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-50/50">
-              <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">Time</th>
-              <th className="py-4 px-6 text-[10px] font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">Activity</th>
+            <tr className="bg-white/10">
+              <th className="py-5 px-8 text-[11px] font-black uppercase tracking-[0.2em] text-sky-400 border-b border-white/10">
+                Time Slot
+              </th>
+              <th className="py-5 px-8 text-[11px] font-black uppercase tracking-[0.2em] text-sky-400 border-b border-white/10">
+                Planned Activity
+              </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-50">
+          <tbody className="divide-y divide-white/5">
             {ROWS.map(([time, activity]) => (
-              <tr key={time} className="group hover:bg-navy/[0.02] transition-colors">
-                <td className="py-4 px-6 text-sm font-bold text-navy whitespace-nowrap">
-                  {time}
+              <tr 
+                key={time} 
+                className="group hover:bg-white/10 transition-all duration-300"
+              >
+                <td className="py-5 px-8 text-sm font-bold text-white whitespace-nowrap">
+                  <div className="flex items-center gap-3">
+                    <Clock className="size-3.5 text-sky-400/50 group-hover:text-sky-400 transition-colors" />
+                    {time}
+                  </div>
                 </td>
-                <td className="py-4 px-6 text-sm text-slate-600 group-hover:text-navy transition-colors">
+                <td className="py-5 px-8 text-sm text-white/80 group-hover:text-white transition-colors">
                   {activity}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+      
+      {/* Visual Footer Note */}
+      <div className="mt-6 flex justify-center items-center gap-2 text-[10px] font-bold text-white/30 uppercase tracking-widest">
+        <span className="h-px w-8 bg-white/10" />
+        Standard School Hours
+        <span className="h-px w-8 bg-white/10" />
       </div>
     </div>
   );

@@ -15,27 +15,22 @@ import {
   Download,
   Users,
   Utensils,
-  BookOpen
+  BookOpen,
+  Camera
 } from "lucide-react";
 import { cn } from "../lib/cn";
 import SEO from "../components/SEO";
 
-<SEO 
-  title="Transparency & Financial Impact" 
-  description="See how your donations transform lives. View our termly financial audits and manual reconciliation reports for student welfare." 
-  path="/impact" 
-/>
-
 export default function Impact() {
-  // Update these manually after school administrative audits
+  // Manual Audit Data
   const lastUpdated = "Dec 2025"; 
   const currentRaised = 12500000;
   const goalRaised = 50000000;
 
   const stats = [
-    { label: "Students Supported", value: "85", icon: Users, color: "text-blue-500", bg: "bg-blue-50" },
-    { label: "Meals Served", value: "12,400", icon: Utensils, color: "text-orange-500", bg: "bg-orange-50" },
-    { label: "Books Purchased", value: "1,150", icon: BookOpen, color: "text-green-500", bg: "bg-green-50" },
+    { label: "Students Supported", value: "85", icon: Users, color: "text-sky-500", bg: "bg-sky-50" },
+    { label: "Meals Served", value: "12,400", icon: Utensils, color: "text-amber-500", bg: "bg-amber-50" },
+    { label: "Books Purchased", value: "1,150", icon: BookOpen, color: "text-navy", bg: "bg-slate-100" },
   ];
 
   const transparency = [
@@ -47,16 +42,22 @@ export default function Impact() {
 
   return (
     <div className="bg-slate-50 min-h-screen pb-24">
-      {/* 1. HERO: Setting the Standard */}
+      <SEO 
+        title="Transparency & Financial Impact" 
+        description="See how your donations transform lives. View our termly financial audits and manual reconciliation reports for student welfare." 
+        path="/impact" 
+      />
+
+      {/* 1. HERO: Authentic Proof of Learning */}
       <PageHero
         size="lg"
-        bgImage="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2000"
+        bgImage="/images/learning.jpg"
         tint="navy"
         title="Accountability & Impact"
         subtitle="We provide manual, termly audits of all community contributions to ensure 100% of your support reaches our learners."
       />
 
-      {/* 2. PROGRESS: Manual Tracking */}
+      {/* 2. PROGRESS: Manual Tracking UI */}
       <Section container="section-tight" className="-mt-12 relative z-10">
         <div className="grid gap-8 lg:grid-cols-5 items-start">
           <div className="lg:col-span-3">
@@ -69,7 +70,7 @@ export default function Impact() {
                       Last Audit: {lastUpdated}
                     </p>
                   </div>
-                  <Badge variant="outline" className="text-navy border-navy/20 bg-navy/5">
+                  <Badge variant="navy" className="bg-navy/5 border-navy/10 text-navy">
                     <History className="size-3 mr-1" /> Manual Reconciliation
                   </Badge>
                 </div>
@@ -90,7 +91,7 @@ export default function Impact() {
         </div>
       </Section>
 
-      {/* 3. VERIFIED STATS: The Proof */}
+      {/* 3. VERIFIED STATS: The Evidence */}
       <Section container="section-tight">
         <Reveal>
           <div className="grid gap-6 sm:grid-cols-3">
@@ -107,7 +108,27 @@ export default function Impact() {
         </Reveal>
       </Section>
 
-      {/* 4. ALLOCATION: Transparency Bars */}
+      {/* 4. VISUAL PROOF: Infrastructure Spotlight */}
+      <Section container="section-tight">
+         <div className="relative rounded-[3.5rem] overflow-hidden min-h-[400px] flex items-end group shadow-2xl">
+            <img 
+               src="/images/classrooms.jpg" 
+               className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
+               alt="School Classroom Block"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/20 to-transparent" />
+            <div className="relative p-10 md:p-16 text-white max-w-2xl">
+               <Badge variant="navy" className="mb-4 bg-sky-500 border-none">Infrastructure Project</Badge>
+               <h3 className="text-4xl font-black mb-4">Quality Learning Environments</h3>
+               <p className="text-white/70 text-lg leading-relaxed">
+                  Every Shilling contributed to our infrastructure fund directly supports the maintenance and expansion of our 
+                  learning blocks, ensuring a safe and comfortable space for all P1–P7 learners.
+               </p>
+            </div>
+         </div>
+      </Section>
+
+      {/* 5. ALLOCATION & VERIFICATION */}
       <Section container="section-tight">
         <div className="grid gap-12 lg:grid-cols-2 items-center">
           <Reveal>
@@ -138,18 +159,17 @@ export default function Impact() {
             </div>
           </Reveal>
 
-          {/* Verification & Reports */}
           <div className="space-y-8">
             <Reveal delay={0.1}>
               <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
                 <div className="flex items-center gap-3 mb-6">
-                  <CalendarCheck className="size-6 text-green-500" />
+                  <CalendarCheck className="size-6 text-sky-500" />
                   <h4 className="text-xl font-bold text-navy">Transaction Verification</h4>
                 </div>
                 <p className="text-sm text-slate-500 leading-relaxed mb-8">
                   Since Mobile Money donations are manual, please forward your transaction confirmation to our admin office to receive an official school receipt.
                 </p>
-                <Button asChild className="w-full py-6 rounded-2xl">
+                <Button asChild className="w-full py-6 rounded-2xl bg-navy text-white font-black shadow-lg shadow-navy/20">
                     <a href="https://wa.me/256757158407" target="_blank" rel="noreferrer">
                         Verify via WhatsApp
                     </a>
@@ -159,7 +179,10 @@ export default function Impact() {
 
             <Reveal delay={0.2}>
               <div className="bg-slate-100 p-8 rounded-[2.5rem] border border-slate-200 border-dashed">
-                <h4 className="font-bold text-navy mb-4">Audited Reports</h4>
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="font-bold text-navy">Audited Reports</h4>
+                  <ShieldCheck className="size-4 text-sky-600" />
+                </div>
                 <div className="space-y-2">
                   <DownloadRow label="Term 2 Financial Summary" />
                   <DownloadRow label="2024 Annual Impact Audit" />

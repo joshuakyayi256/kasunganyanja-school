@@ -4,14 +4,27 @@ import Reveal from "../components/Reveal";
 import { useState, useEffect } from "react";
 import { Maximize2, Camera, X } from "lucide-react";
 
-// The generated images are now mapped to specific moments
+/**
+ * Mapped your local images to moments. 
+ * Note: I've excluded .CR2 files as browsers cannot display raw camera files.
+ * I've also descriptive titles to help with SEO and user experience.
+ */
 const MOMENTS = [
-  { src: "https://images.unsplash.com/photo-1509062522246-37359ec3113d?q=80&w=2000", title: "Learning Together", type: "Classroom" },
-  { src: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2000", title: "Community Smiles", type: "Break Time" },
-  { src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2000", title: "Bright Futures", type: "Student Portrait" },
-  { src: "https://images.unsplash.com/photo-1540747913346-19e3adbd174f?q=80&w=2000", title: "Outdoor Play", type: "Campus Life" },
-  { src: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2000", title: "Science Discovery", type: "Academic" },
-  { src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2000", title: "Art & Creativity", type: "After School" },
+  { src: "/images/smiles.jpg", title: "Bright Smiles", type: "Student Life" },
+  { src: "/images/girls-linedup.jpg", title: "Morning Assembly", type: "Discipline" },
+  { src: "/images/learning.jpg", title: "Focused Learning", type: "Classroom" },
+  { src: "/images/mainBuilding.jpg", title: "Our Main Campus", type: "Infrastructure" },
+  { src: "/images/boys-linedup.jpg", title: "Uniform & Pride", type: "Student Life" },
+  { src: "/images/chalkboard.jpg", title: "Interactive Lessons", type: "Academic" },
+  { src: "/images/compound.jpg", title: "School Grounds", type: "Campus" },
+  { src: "/images/girlsbacktoback.jpg", title: "Friendship & Bonds", type: "Social" },
+  { src: "/images/furniture.jpg", title: "Equipped for Success", type: "Facilities" },
+  { src: "/images/learning (2).jpg", title: "Peer Collaboration", type: "Classroom" },
+  { src: "/images/girlsinfront.jpg", title: "Student Leadership", type: "Portraits" },
+  { src: "/images/field.jpg", title: "Active Play", type: "Sports" },
+  { src: "/images/classrooms.jpg", title: "Primary Block", type: "Infrastructure" },
+  { src: "/images/outdoors.jpg", title: "Outdoor Education", type: "Campus Life" },
+  { src: "/images/child-save.jpg", title: "Safe Environment", type: "Community" },
 ];
 
 export default function Gallery() {
@@ -28,13 +41,15 @@ export default function Gallery() {
 
   return (
     <div className="bg-slate-50 min-h-screen pb-20">
-      {/* Use the best smiling group image for the Hero */}
+      {/* HERO: Using smiles.jpg as it's the most welcoming image 
+         for the top of the page.
+      */}
       <PageHero
         size="lg"
         tint="navy"
-        bgImage="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=2000"
+        bgImage="/images/smiles.jpg"
         title="Our Story in Frames"
-        subtitle="Step inside Kasunganyanja Parents Primary School and see our learners in action."
+        subtitle="Real moments from Kasunganyanja Parents Primary School."
       />
 
       <Section container="section-tight">
@@ -49,7 +64,7 @@ export default function Gallery() {
             </div>
           </div>
           <div className="hidden sm:block text-right">
-             <span className="text-4xl font-black text-navy/10 leading-none">GALLERY</span>
+             <span className="text-4xl font-black text-navy/10 leading-none tracking-tighter">AUTHENTIC</span>
           </div>
         </div>
 
@@ -58,7 +73,7 @@ export default function Gallery() {
           {MOMENTS.map((item, i) => (
             <Reveal key={item.src} delay={i * 0.05} y={30}>
               <div 
-                className="group relative overflow-hidden rounded-[2.5rem] bg-white shadow-sm hover:shadow-2xl transition-all duration-500 cursor-zoom-in"
+                className="group relative overflow-hidden rounded-[2.5rem] bg-white shadow-sm hover:shadow-2xl transition-all duration-500 cursor-zoom-in border border-slate-100"
                 onClick={() => setSelectedImg(item.src)}
               >
                 <img
