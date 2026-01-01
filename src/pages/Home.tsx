@@ -47,7 +47,7 @@ export default function Home() {
       {/* 1. HERO: Emotional Hook */}
       <PageHero
         size="xl"
-        bgImage="/images/hero-home.jpg"
+        bgImage="/images/IMG_2253.JPG"
         tint="navy"
         title={school.name}
         subtitle={`Empowering the next generation in Kasunganyanja. A licensed P1–P7 school committed to "${school.motto}".`}

@@ -79,7 +79,7 @@ export default function Academics() {
       {/* HERO: Using girlsinfront.jpg for a strong academic portrait */}
       <PageHero
         size="lg"
-        bgImage="/images/girlsinfront.jpg"
+        bgImage="/images/academics.png"
         tint="navy"
         title="Academic Excellence"
         subtitle="Fostering critical thinking, character, and community through a balanced, holistic curriculum."
