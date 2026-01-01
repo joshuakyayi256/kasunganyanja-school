@@ -21,6 +21,8 @@ import News from "./pages/News";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 
 /**
  * ScrollToTop ensures the window scrolls back to the top 
@@ -99,6 +101,8 @@ export default function App() {
               <Donate />
             </>
           } />
+          <Route path="/privacy" element={<Privacy />} />
+<Route path="/terms" element={<Terms />} />
 
           <Route path="/sponsor" element={
             <>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, X, Phone, HeartHandshake, ChevronDown, Sparkles, ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion"; // Highly recommended for mobile feel
+import { Menu, X, Phone, HeartHandshake, ChevronDown, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion"; 
 import Button from "./ui/Button";
 import { cn } from "../lib/cn";
 import useLockBodyScroll from "../hooks/useLockBodyScroll";
@@ -28,7 +28,6 @@ export default function NavBar() {
   const moreRef = useRef<HTMLDivElement | null>(null);
   const { pathname } = useLocation();
 
-  // Close menus when navigating
   useEffect(() => {
     setOpen(false);
     setMoreOpen(false);
@@ -44,7 +43,7 @@ export default function NavBar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-[100]">
-      {/* 1. ANNOUNCEMENT BAR (Desktop Only) */}
+      {/* 1. ANNOUNCEMENT BAR */}
       <div className={cn(
         "bg-navy text-white/80 transition-all duration-500 overflow-hidden hidden md:block",
         scrolled ? "h-0 opacity-0" : "h-10 opacity-100"
@@ -69,10 +68,14 @@ export default function NavBar() {
           scrolled ? "bg-white/95 border-slate-200" : "bg-white/40 border-white/20"
         )}>
           
-          {/* LOGO */}
+          {/* LOGO SECTION - Updated with Badge */}
           <Link to="/" className="flex items-center gap-3 pl-4 group shrink-0">
-            <div className="h-10 w-10 rounded-2xl bg-navy flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform duration-500">
-              <Sparkles className="size-5" />
+            <div className="h-12 w-12 rounded-xl overflow-hidden bg-white shadow-xl group-hover:scale-110 transition-transform duration-500 flex items-center justify-center p-0.5">
+              <img 
+                src="/KPNS Badge.jpg" 
+                alt="KPNS Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
             <div className="flex flex-col leading-none">
               <span className="font-black text-navy text-lg tracking-tighter">Kasunganyanja</span>
@@ -117,8 +120,8 @@ export default function NavBar() {
 
           {/* MOBILE TOGGLE & CTA */}
           <div className="flex items-center gap-2 pr-1">
-            <Button asChild size="md" className="hidden sm:flex rounded-full px-8 h-11 bg-navy text-white shadow-xl border-none">
-              <Link to="/donate" className="text-xs font-black">
+            <Button asChild size="md" className="hidden sm:flex rounded-full px-8 h-11 bg-navy text-white shadow-xl border-none font-black">
+              <Link to="/donate" className="text-xs">
                 <HeartHandshake className="size-4 mr-2" /> Support Us
               </Link>
             </Button>
@@ -144,10 +147,12 @@ export default function NavBar() {
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className="fixed inset-0 bg-white z-[150] flex flex-col lg:hidden"
           >
-            {/* Mobile Menu Header */}
+            {/* Mobile Menu Header - Updated with Badge */}
             <div className="flex items-center justify-between p-6 border-b border-slate-100">
               <Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-2xl bg-navy flex items-center justify-center text-white"><Sparkles className="size-5" /></div>
+                <div className="h-12 w-12 rounded-xl overflow-hidden bg-white shadow-md border p-0.5 flex items-center justify-center">
+                  <img src="/KPNS Badge.jpg" alt="KPNS Badge" className="w-full h-full object-contain" />
+                </div>
                 <span className="font-black text-navy text-lg tracking-tighter">Kasunganyanja</span>
               </Link>
               <button onClick={() => setOpen(false)} className="h-11 w-11 rounded-full bg-slate-100 flex items-center justify-center text-navy"><X className="size-6" /></button>

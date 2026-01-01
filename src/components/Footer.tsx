@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { 
   Phone, Mail, MapPin, ArrowRight, HeartHandshake, 
-  Facebook, Instagram, Twitter, Sparkles, Send 
+  Facebook, Instagram, Twitter, Send 
 } from "lucide-react";
 import Button from "./ui/Button";
 import { cn } from "../lib/cn";
@@ -18,19 +18,23 @@ export default function Footer() {
       <div className="bg-navy text-white pt-24 pb-12">
         <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-12 gap-12">
           
-          {/* Brand Section - Span 4 columns */}
+          {/* Brand Section - Updated with official badge */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500 to-navy grid place-items-center text-white shadow-xl">
-                <Sparkles className="size-6" />
+            <div className="flex items-center gap-4">
+              <div className="h-14 w-14 rounded-2xl overflow-hidden bg-white shadow-2xl p-0.5 flex items-center justify-center">
+                <img 
+                  src="/KPNS Badge.jpg" 
+                  alt="KPNS Official Badge" 
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <div className="flex flex-col">
-                <span className="text-2xl font-black tracking-tight leading-none">Kasunganyanja</span>
-                <span className="text-xs font-bold text-white/40 uppercase tracking-widest mt-1">Parents Primary School</span>
+              <div className="flex flex-col leading-none">
+                <span className="text-2xl font-black tracking-tighter">Kasunganyanja</span>
+                <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mt-1.5">Parents Primary School</span>
               </div>
             </div>
             
-            <p className="text-white/60 leading-relaxed text-sm max-w-sm">
+            <p className="text-white/60 leading-relaxed text-sm max-w-sm font-medium">
               Empowering the next generation in Bunyangabu District through holistic education, 
               character building, and community engagement. Committed to "Transformation and Success."
             </p>
@@ -53,9 +57,9 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links - Span 2 columns */}
+          {/* Quick Links */}
           <div className="lg:col-span-2">
-            <h4 className="text-sm font-black uppercase tracking-widest text-white/40 mb-6">Explore</h4>
+            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-8">Explore</h4>
             <ul className="space-y-4">
               <li><Link to="/about" className={linkCls}>About Us</Link></li>
               <li><Link to="/academics" className={linkCls}>Academics</Link></li>
@@ -65,9 +69,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Support - Span 2 columns */}
+          {/* Support */}
           <div className="lg:col-span-2">
-            <h4 className="text-sm font-black uppercase tracking-widest text-white/40 mb-6">Support</h4>
+            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-8">Support</h4>
             <ul className="space-y-4">
               <li>
                 <Link to="/donate" className={cn(linkCls, "text-sky-400 hover:text-sky-300 font-bold")}>
@@ -79,10 +83,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter / Contact - Span 4 columns */}
+          {/* Newsletter / Contact */}
           <div className="lg:col-span-4">
-            <h4 className="text-sm font-black uppercase tracking-widest text-white/40 mb-6">Stay Updated</h4>
-            <p className="text-white/60 text-sm mb-4">Join our newsletter to receive stories of impact from our students.</p>
+            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-8">Stay Updated</h4>
+            <p className="text-white/60 text-sm mb-6 font-medium">Join our newsletter to receive stories of impact from our students.</p>
             
             <form
               className="relative mb-8"
@@ -102,14 +106,18 @@ export default function Footer() {
               </button>
             </form>
 
-            <div className="space-y-3 text-sm text-white/60">
+            <div className="space-y-4 text-sm text-white/60 font-medium">
               <div className="flex items-center gap-3">
-                <Phone className="size-4 text-sky-400" />
-                <a href="tel:+256757158407" className="hover:text-white">+256 757 158 407</a>
+                <div className="size-8 rounded-lg bg-white/5 flex items-center justify-center">
+                  <Phone className="size-4 text-sky-400" />
+                </div>
+                <a href="tel:+256757158407" className="hover:text-white transition-colors">+256 757 158 407</a>
               </div>
               <div className="flex items-start gap-3">
-                <MapPin className="size-4 text-sky-400 mt-1" />
-                <span className="leading-tight">Kibiito Sub County, Bunyangabu District, Uganda</span>
+                <div className="size-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
+                  <MapPin className="size-4 text-sky-400" />
+                </div>
+                <span className="leading-snug">Kibiito Sub County, Bunyangabu District, Uganda</span>
               </div>
             </div>
           </div>
@@ -117,14 +125,15 @@ export default function Footer() {
 
         {/* 3. SUB-FOOTER */}
         <div className="max-w-6xl mx-auto px-6 mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-xs text-white/40 font-medium">
+          <div className="text-[10px] text-white/40 font-bold uppercase tracking-widest">
             © {new Date().getFullYear()} Kasunganyanja Parents Primary School. 
             <span className="hidden md:inline ml-2">Licensed P1–P7 Educational Institution.</span>
           </div>
-          <div className="flex gap-8 text-[10px] uppercase tracking-widest font-bold text-white/40">
-            <Link to="/contact" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link to="/contact" className="hover:text-white transition-colors">Terms of Use</Link>
-          </div>
+          {/* src/components/Footer.tsx */}
+<div className="flex gap-8 text-[10px] uppercase tracking-[0.2em] font-black text-white/30">
+  <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+  <Link to="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
+</div>
         </div>
       </div>
     </footer>

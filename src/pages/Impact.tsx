@@ -51,7 +51,7 @@ export default function Impact() {
       {/* 1. HERO: Authentic Proof of Learning */}
       <PageHero
         size="lg"
-        bgImage="/images/learning.jpg"
+        bgImage="/images/girls-linedup.jpg"
         tint="navy"
         title="Accountability & Impact"
         subtitle="We provide manual, termly audits of all community contributions to ensure 100% of your support reaches our learners."
