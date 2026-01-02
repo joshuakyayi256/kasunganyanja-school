@@ -6,12 +6,12 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 
 // 1. COMPREHENSIVE IMAGE LIST
 const ALL_IMAGES = [
-  "1@ (9).jpg", "academics.png", "boydb2b.jpg", "boys-linedup.jpg", "chalkboard.jpg", 
-  "child-save.jpg", "classrooms-1.jpg", "classrooms.jpg", "compound area.jpg", "compound.jpg", 
-  "field (2).jpg", "field.jpg", "founder.jpg", "furniture.jpg", "girls lined1.jpg", 
+  "1@ (9).jpg", "IMG_1205.JPG","IMG_1206.JPG", "IMG_1207.JPG", "boydb2b.jpg", "boys-linedup.jpg", "chalkboard.jpg", 
+  "child-save.jpg", "classrooms-1.jpg", "classrooms.jpg", "compound area.jpg", "IMG_1208.JPG", 
+  "field (2).jpg", "field.jpg","IMG_1071.JPG", "furniture.jpg", "girls lined1.jpg", 
   "girls-linedup.jpg", "girlsbacktoback.jpg", "girlsinfront.jpg", "hero-home.jpg", "IMG_0803.jpg", 
   "IMG_0808.jpg", "IMG_0809.jpg", "IMG_0810.jpg", "IMG_0905.jpg", "IMG_0907.jpg", 
-  "IMG_0914.jpg", "IMG_1052.jpg", "IMG_1060.jpg", "IMG_1061.JPG", "IMG_1066.JPG", 
+  "IMG_0914.jpg", "IMG_1052.jpg", "IMG_1060.jpg", "IMG_1061.JPG", "IMG_1066.JPG",
   "IMG_1067.JPG", "IMG_1070.JPG", "IMG_1072.JPG", "IMG_1073.JPG", "IMG_1075.JPG", 
   "IMG_1084.JPG", "IMG_1085.JPG", "IMG_1089.JPG", "IMG_1094.JPG", "IMG_1103.JPG", 
   "IMG_1160.JPG", "IMG_1161.JPG", "IMG_1169.JPG", "IMG_1177.JPG", "IMG_1192.JPG", 
